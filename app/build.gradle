@@ -1,0 +1,95 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.support:design:24.2.0'
+    testCompile 'junit:junit:4.12'
+
+    // Apache Commons
+    compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'org.apache.directory.studio:org.apache.commons.io:2.4'
+
+    // ButterKnife
+    compile 'com.jakewharton:butterknife:8.0.1'
+    apt 'com.jakewharton:butterknife-compiler:8.0.1'
+
+    // EventBus
+    compile 'org.greenrobot:eventbus:3.0.0'
+
+    // RxJava/RxAndroid
+    compile 'io.reactivex:rxandroid:1.2.1'
+    // Because RxAndroid releases are few and far between, it is recommended you also
+    // explicitly depend on RxJava's latest version for bug fixes and new features.
+    compile 'io.reactivex:rxjava:1.1.9'
+
+    // Retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-scalars:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
+
+    // AndroidAsync
+//    compile 'com.koushikdutta.async:androidasync:2.1.8'
+
+    // Custom Buttons
+//    compile 'com.github.dakatso:livebutton:1.0.0'
+
+    // Discrete SeekBar
+//    compile 'org.adw.library:discrete-seekbar:1.0.1'
+
+    // DragListView
+//    compile 'com.github.woxthebox:draglistview:1.2.9'
+
+    // Multislider
+//    compile 'io.apptik.widget:multislider:1.2'
+//    compile project(':lib')
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
+    }
+}
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.2"
+    defaultConfig {
+        applicationId "de.comdirect.collabothon2016.collabothon2016"
+        minSdkVersion 23
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "LOG_TAG", '"Collabothon 2016"'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
