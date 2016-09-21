@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import de.comdirect.collabothon2016.collabothon2016.R;
 
@@ -30,7 +31,7 @@ public class VotingFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
+    
     public VotingFragment() {
         // Required empty public constructor
     }

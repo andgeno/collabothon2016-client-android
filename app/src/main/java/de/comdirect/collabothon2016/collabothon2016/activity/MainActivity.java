@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -64,9 +65,9 @@ public class MainActivity extends AppCompatActivity implements
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) frameLayout.getLayoutParams();
-        // FIXME Hoehe ist gehackt fuer das HTC One M9
-        lp.setMargins(0, 160, 0, 0);
+    //    LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) frameLayout.getLayoutParams();
+        // FIXME Hoehe ist gehackt fuer das HTC One M9 -> gefixt! Wir haben jetzt LinearLayout
+  //      lp.setMargins(0, 160, 0, 0);
 //        lp.setMargins(0, UiUtils.getStatusBarHeight(this), 0, 0);
 
         onShowGroupOverview();
