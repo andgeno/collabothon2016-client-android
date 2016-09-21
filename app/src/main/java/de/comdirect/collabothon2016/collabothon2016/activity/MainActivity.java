@@ -65,11 +65,6 @@ public class MainActivity extends AppCompatActivity implements
 
         navigationView.setNavigationItemSelectedListener(this);
 
-    //    LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) frameLayout.getLayoutParams();
-        // FIXME Hoehe ist gehackt fuer das HTC One M9 -> gefixt! Wir haben jetzt LinearLayout
-  //      lp.setMargins(0, 160, 0, 0);
-//        lp.setMargins(0, UiUtils.getStatusBarHeight(this), 0, 0);
-
         onShowGroupOverview();
     }
 
