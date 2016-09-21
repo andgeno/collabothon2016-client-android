@@ -74,7 +74,7 @@ android {
     buildToolsVersion "24.0.2"
     defaultConfig {
         applicationId "de.comdirect.collabothon2016.collabothon2016"
-        minSdkVersion 23
+        minSdkVersion 21
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
