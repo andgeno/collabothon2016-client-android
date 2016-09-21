@@ -1,4 +1,4 @@
-package de.comdirect.collabothon2016.collabothon2016;
+package de.comdirect.collabothon2016.collabothon2016.util;
 
 public class UiUtils {
 

@@ -1,4 +1,4 @@
-package de.comdirect.collabothon2016.collabothon2016;
+package de.comdirect.collabothon2016.collabothon2016.activity;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +18,9 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.comdirect.collabothon2016.collabothon2016.R;
+import de.comdirect.collabothon2016.collabothon2016.fragment.GroupOverviewFragment;
+import de.comdirect.collabothon2016.collabothon2016.fragment.VotingFragment;
 
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
@@ -82,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.nav_drawer, menu);
+        getMenuInflater().inflate(R.menu.menu_options, menu);
         return true;
     }
 
