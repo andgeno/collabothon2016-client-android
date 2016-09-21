@@ -10,4 +10,12 @@
         android:layout_height="match_parent"
         android:text="Voting happens here!" />
 
+    <TextView
+        android:id="@+id/my_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tasadgadfg"
+        android:background="#FF00FF"
+        android:elevation="5dp" />
+
 </FrameLayout>
