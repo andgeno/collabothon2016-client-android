@@ -2,7 +2,6 @@ package de.comdirect.collabothon2016.collabothon2016.activity;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,9 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
@@ -27,6 +24,8 @@ import de.comdirect.collabothon2016.collabothon2016.event.GroupSelectedEvent;
 import de.comdirect.collabothon2016.collabothon2016.fragment.GroupDetailsFragment;
 import de.comdirect.collabothon2016.collabothon2016.fragment.GroupOverviewFragment;
 import de.comdirect.collabothon2016.collabothon2016.fragment.VotingFragment;
+import de.comdirect.collabothon2016.collabothon2016.service.GroupService;
+import de.comdirect.collabothon2016.collabothon2016.util.ServiceFactory;
 
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
@@ -44,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements
 
     @BindView(R.id.nav_view)
     NavigationView navigationView;
+
+    private GroupService groupService = ServiceFactory.createRetrofitService(GroupService.class, GroupService.ENDPOINT);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,7 +170,11 @@ public class MainActivity extends AppCompatActivity implements
 
     public void onShowGroupDetails(int groupId) {
         GroupSelectedEvent event = new GroupSelectedEvent();
-        event.groupId=groupId;
+        event.groupId = groupId;
+
+//        Response<ResponBody> body = groupService.getGroup(groupId);
+//        body.body();
+
 
         EventBus.getDefault().postSticky(event);
 //        EventBus.getDefault().getStickyEvent(GroupSelectedEvent.class).groupId
@@ -188,7 +193,6 @@ public class MainActivity extends AppCompatActivity implements
         ft.replace(R.id.nav_drawer_content, frag, tag);
         ft.commit();
     }
-
 
 
     @Override
