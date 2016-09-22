@@ -89,11 +89,8 @@ public class GroupOverviewFragment extends Fragment {
         myGroupButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                ((MainActivity)getActivity()).onShowIsinBrowser();
-
-
-                Toast.makeText(getContext(), "ACTION My Group 1", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Open Group 1", Toast.LENGTH_SHORT).show();
+                ((MainActivity)getActivity()).onShowGroupDetails(1);
             }
         });
 

@@ -13,13 +13,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.comdirect.collabothon2016.collabothon2016.R;
+import de.comdirect.collabothon2016.collabothon2016.event.GroupSelectedEvent;
+import de.comdirect.collabothon2016.collabothon2016.fragment.GroupDetailsFragment;
 import de.comdirect.collabothon2016.collabothon2016.fragment.GroupOverviewFragment;
 import de.comdirect.collabothon2016.collabothon2016.fragment.VotingFragment;
 
@@ -146,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements
         ft.commit();
     }
 
-    public void onShowIsinBrowser() {
+    private void onShowIsinBrowser() {
         getSupportActionBar().setTitle("ISIN Browser");
         VotingFragment frag = VotingFragment.newInstance(null, null);
         String tag = frag.getClass().getSimpleName();
@@ -162,7 +167,28 @@ public class MainActivity extends AppCompatActivity implements
         ft.commit();
     }
 
-    
+    public void onShowGroupDetails(int groupId) {
+        GroupSelectedEvent event = new GroupSelectedEvent();
+        event.groupId=groupId;
+
+        EventBus.getDefault().postSticky(event);
+//        EventBus.getDefault().getStickyEvent(GroupSelectedEvent.class).groupId
+
+        getSupportActionBar().setTitle("GRUPPENNAMMMMMEEE");
+        GroupDetailsFragment frag = GroupDetailsFragment.newInstance(null, null);
+        String tag = frag.getClass().getSimpleName();
+
+        FragmentManager fm = getSupportFragmentManager();
+        boolean hasBackStackEntries = fm.getBackStackEntryCount() > 0;
+
+        FragmentTransaction ft = fm.beginTransaction();
+        if (hasBackStackEntries) {
+            ft.addToBackStack(null);
+        }
+        ft.replace(R.id.nav_drawer_content, frag, tag);
+        ft.commit();
+    }
+
 
 
     @Override
