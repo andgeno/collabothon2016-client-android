@@ -39,8 +39,8 @@ public class GroupService {
     }
 
     public interface RestService {
-        @GET("groups/rank/{group-id}")
-        Observable<Response<ResponseBody>> getGroup(@Path("group-id") Integer groupId);
+        @GET("rating/groups/rank/{group-id}")
+        Observable<Response<ResponseBody>> getGroup(@Path("group-id") int groupId);
     }
 
 

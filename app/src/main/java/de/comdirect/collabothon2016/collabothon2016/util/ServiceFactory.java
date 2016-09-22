@@ -36,19 +36,23 @@ public class ServiceFactory {
         private AtomicLong threadSafeRequestId = new AtomicLong(0);
 
         @Override
-        public Response intercept(Chain chain) throws IOException {
+        public Response intercept(Interceptor.Chain chain) throws IOException {
             long requestId = threadSafeRequestId.incrementAndGet();
 
             Request request = chain.request();
             long t1 = System.nanoTime();
             Buffer sinkRequest = new Buffer();
-            request.body().writeTo(sinkRequest);
+            long bodyLen = 0;
+            if (request.method() == "POST") {
+                request.body().writeTo(sinkRequest);
+                bodyLen = request.body().contentLength();
+            }
             String contentRequest = sinkRequest.readUtf8();
             Log.d(BuildConfig.LOG_TAG, String.format("REST/SEND [%d] >>> %s @ [%s] Content (%d): [%s]",
                     requestId,
                     request.method(),
                     request.url(),
-                    request.body().contentLength(),
+                    bodyLen,
                     contentRequest));
 
             Response response = chain.proceed(request);

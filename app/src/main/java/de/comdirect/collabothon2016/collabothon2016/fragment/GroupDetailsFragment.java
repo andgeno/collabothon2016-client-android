@@ -66,7 +66,7 @@ public class GroupDetailsFragment extends Fragment {
 
         Log.d(BuildConfig.LOG_TAG, "####### REST");
 
-        groupService.getService().getGroup(1)
+        groupService.getService().getGroup(0)
                 .subscribeOn(newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Response<ResponseBody>>() {
