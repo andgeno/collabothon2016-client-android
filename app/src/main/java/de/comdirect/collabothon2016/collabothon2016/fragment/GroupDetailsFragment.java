@@ -10,20 +10,14 @@ import android.view.ViewGroup;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.io.IOException;
-
 import butterknife.ButterKnife;
 import de.comdirect.collabothon2016.collabothon2016.BuildConfig;
 import de.comdirect.collabothon2016.collabothon2016.R;
 import de.comdirect.collabothon2016.collabothon2016.activity.MainActivity;
 import de.comdirect.collabothon2016.collabothon2016.event.GroupSelectedEvent;
-import de.comdirect.collabothon2016.collabothon2016.model.Group;
 import de.comdirect.collabothon2016.collabothon2016.service.GroupService;
-import de.comdirect.collabothon2016.collabothon2016.util.ServiceFactory;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.Response;
-import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 
@@ -49,13 +43,11 @@ public class GroupDetailsFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        groupService = ServiceFactory.createRetrofitService(GroupService.class, GroupService.ENDPOINT);
-
+        groupService = GroupService.getInstance();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
 
 
 //        Call<Group> request = groupService.getGroup(1);
@@ -74,7 +66,7 @@ public class GroupDetailsFragment extends Fragment {
 
         Log.d(BuildConfig.LOG_TAG, "####### REST");
 
-        groupService.getGroup(1)
+        groupService.getService().getGroup(1)
                 .subscribeOn(newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Response<ResponseBody>>() {
@@ -95,8 +87,7 @@ public class GroupDetailsFragment extends Fragment {
                 });
 
 
-
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle("GRUPPENNAMMMMMEEE");
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("GRUPPENNAMMMMMEEE");
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_group_overview, container, false);
         ButterKnife.bind(this, rootView);

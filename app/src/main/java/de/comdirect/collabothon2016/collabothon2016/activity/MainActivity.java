@@ -25,7 +25,6 @@ import de.comdirect.collabothon2016.collabothon2016.fragment.GroupDetailsFragmen
 import de.comdirect.collabothon2016.collabothon2016.fragment.GroupOverviewFragment;
 import de.comdirect.collabothon2016.collabothon2016.fragment.VotingFragment;
 import de.comdirect.collabothon2016.collabothon2016.service.GroupService;
-import de.comdirect.collabothon2016.collabothon2016.util.ServiceFactory;
 
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
@@ -44,11 +43,15 @@ public class MainActivity extends AppCompatActivity implements
     @BindView(R.id.nav_view)
     NavigationView navigationView;
 
+    private GroupService groupService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        groupService = GroupService.init(GroupService.ENDPOINT);
 
         setSupportActionBar(toolbar);
 
