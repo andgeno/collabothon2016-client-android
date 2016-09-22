@@ -44,8 +44,6 @@ public class MainActivity extends AppCompatActivity implements
     @BindView(R.id.nav_view)
     NavigationView navigationView;
 
-    private GroupService groupService = ServiceFactory.createRetrofitService(GroupService.class, GroupService.ENDPOINT);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -172,12 +170,12 @@ public class MainActivity extends AppCompatActivity implements
         GroupSelectedEvent event = new GroupSelectedEvent();
         event.groupId = groupId;
 
-//        Response<ResponBody> body = groupService.getGroup(groupId);
+//        Response<ResponBody> body = groupService.getGroup(id);
 //        body.body();
 
 
         EventBus.getDefault().postSticky(event);
-//        EventBus.getDefault().getStickyEvent(GroupSelectedEvent.class).groupId
+//        EventBus.getDefault().getStickyEvent(GroupSelectedEvent.class).id
 
         getSupportActionBar().setTitle("GRUPPENNAMMMMMEEE");
         GroupDetailsFragment frag = GroupDetailsFragment.newInstance(null, null);
