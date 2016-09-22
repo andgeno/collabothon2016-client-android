@@ -110,11 +110,15 @@ public class MainActivity extends AppCompatActivity implements
             case R.id.nav_item_group_overview:
                 onShowGroupOverview();
                 break;
-            case R.id.nav_item_voting:
-                onShowVoting();
+            case R.id.nav_item_isin_browser:
+                onShowIsinBrowser();
                 break;
-            case R.id.nav_item_send:
-            case R.id.nav_item_share:
+            case R.id.nav_item_account:
+            case R.id.nav_item_about_and_help:
+            case R.id.nav_item_change_avatar:
+            case R.id.nav_item_isin_favorites:
+            case R.id.nav_item_notifications:
+            case R.id.nav_item_software_licenses:
                 Toast.makeText(this, "Not yet implemented", Toast.LENGTH_SHORT).show();
                 break;
             default:
@@ -141,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements
         ft.commit();
     }
 
-    private void onShowVoting() {
+    private void onShowIsinBrowser() {
         VotingFragment frag = VotingFragment.newInstance(null, null);
         String tag = frag.getClass().getSimpleName();
 
