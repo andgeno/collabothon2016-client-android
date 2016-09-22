@@ -27,6 +27,7 @@
                 android:orientation="vertical">
 
                 <Button
+                    android:id="@+id/button_my_group_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="bla 1" />

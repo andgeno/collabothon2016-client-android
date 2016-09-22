@@ -10,11 +10,13 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.comdirect.collabothon2016.collabothon2016.R;
+import de.comdirect.collabothon2016.collabothon2016.activity.MainActivity;
 
 
 /**
@@ -41,6 +43,9 @@ public class GroupOverviewFragment extends Fragment {
 
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
+
+    @BindView(R.id.button_my_group_1)
+    Button myGroupButton1;
 
     private OnFragmentInteractionListener mListener;
 
@@ -80,6 +85,17 @@ public class GroupOverviewFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_group_overview, container, false);
         ButterKnife.bind(this, rootView);
+
+        myGroupButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                ((MainActivity)getActivity()).onShowIsinBrowser();
+
+
+                Toast.makeText(getContext(), "ACTION My Group 1", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

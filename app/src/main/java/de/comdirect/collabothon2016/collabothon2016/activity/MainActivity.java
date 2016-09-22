@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements
         ft.commit();
     }
 
-    private void onShowIsinBrowser() {
+    public void onShowIsinBrowser() {
         getSupportActionBar().setTitle("ISIN Browser");
         VotingFragment frag = VotingFragment.newInstance(null, null);
         String tag = frag.getClass().getSimpleName();
@@ -161,6 +161,9 @@ public class MainActivity extends AppCompatActivity implements
         ft.replace(R.id.nav_drawer_content, frag, tag);
         ft.commit();
     }
+
+    
+
 
     @Override
     public void onFragmentInteraction(Uri uri) {
