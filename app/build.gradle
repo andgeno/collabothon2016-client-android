@@ -57,6 +57,9 @@ dependencies {
     // Multislider
 //    compile 'io.apptik.widget:multislider:1.2'
 //    compile project(':lib')
+
+    // Charts
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.0-beta1'
 }
 
 buildscript {
