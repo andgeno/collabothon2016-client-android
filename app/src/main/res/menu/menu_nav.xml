@@ -5,7 +5,7 @@
         <item
             android:id="@+id/nav_item_group_overview"
             android:icon="@drawable/ic_group_work_black_24dp"
-            android:title="Your Groups" />
+            android:title="My Groups" />
         <item
             android:id="@+id/nav_item_account"
             android:icon="@drawable/ic_account_circle_white_18dp"

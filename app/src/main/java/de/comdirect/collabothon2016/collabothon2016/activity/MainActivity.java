@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void onShowGroupOverview() {
+        getSupportActionBar().setTitle("My Groups");
         GroupOverviewFragment frag = GroupOverviewFragment.newInstance(null, null);
         String tag = frag.getClass().getSimpleName();
 
@@ -146,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void onShowIsinBrowser() {
+        getSupportActionBar().setTitle("ISIN Browser");
         VotingFragment frag = VotingFragment.newInstance(null, null);
         String tag = frag.getClass().getSimpleName();
 
