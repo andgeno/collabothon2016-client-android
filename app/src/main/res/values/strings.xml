@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Collabothon2016</string>
+    <string name="app_name">CrowdTrading</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
