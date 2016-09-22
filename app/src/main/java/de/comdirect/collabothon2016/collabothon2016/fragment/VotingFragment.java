@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import de.comdirect.collabothon2016.collabothon2016.R;
 
@@ -67,7 +66,7 @@ public class VotingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_voting, container, false);
+        return inflater.inflate(R.layout.fragment_isin_browser, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

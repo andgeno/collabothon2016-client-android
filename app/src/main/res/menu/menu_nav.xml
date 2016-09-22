@@ -4,24 +4,40 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_item_group_overview"
-            android:icon="@drawable/ic_account_circle_white_18dp"
-            android:title="Group Overview" />
+            android:icon="@drawable/ic_group_work_black_24dp"
+            android:title="Your Groups" />
         <item
-            android:id="@+id/nav_item_voting"
-            android:icon="@drawable/ic_record_voice_over_white_18dp"
-            android:title="Voting" />
+            android:id="@+id/nav_item_account"
+            android:icon="@drawable/ic_account_circle_white_18dp"
+            android:title="Account" />
+        <item
+            android:id="@+id/nav_item_change_avatar"
+            android:icon="@drawable/ic_account_box_black_24dp"
+            android:title="Change Avatar" />
+        <item
+            android:id="@+id/nav_item_notifications"
+            android:icon="@drawable/ic_notifications_active_black_24dp"
+            android:title="Notifications" />
+        <item
+            android:id="@+id/nav_item_isin_browser"
+            android:icon="@drawable/ic_search_24px"
+            android:title="ISIN Browser" />
+        <item
+            android:id="@+id/nav_item_isin_favorites"
+            android:icon="@drawable/ic_favorite_black_24dp"
+            android:title="ISIN Favorites" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Other">
         <menu>
             <item
-                android:id="@+id/nav_item_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_item_about_and_help"
+                android:icon="@drawable/ic_live_help_black_24dp"
+                android:title="About and Help" />
             <item
-                android:id="@+id/nav_item_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_item_software_licenses"
+                android:icon="@drawable/ic_view_comfy_black_24dp"
+                android:title="Software Licenses" />
         </menu>
     </item>
 
