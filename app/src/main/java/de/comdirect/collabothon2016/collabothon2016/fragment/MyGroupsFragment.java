@@ -12,6 +12,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -39,14 +43,29 @@ public class MyGroupsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    Boolean fabButtonActive = false;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
+    // FAB Animationen
+//    Animation show_fab_1 = AnimationUtils.loadAnimation(((MainActivity) getActivity()).getApplication(), R.anim.fab1_show);
+  //  Animation hide_fab_1 = AnimationUtils.loadAnimation(((MainActivity) getActivity()).getApplication(), R.anim.fab1_hide);
+
 
     @BindView(R.id.fab)
     FloatingActionButton fab;
+
+    @BindView(R.id.fab_1)
+    FloatingActionButton miniFab1;
+
+    @BindView(R.id.fab_2)
+    FloatingActionButton miniFab2;
+
+    @BindView(R.id.fab_3)
+    FloatingActionButton miniFab3;
+
 
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
@@ -117,9 +136,58 @@ public class MyGroupsFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//                Toast.makeText(getContext(), "ACTION", Toast.LENGTH_SHORT).show();
+                Context application = ((MainActivity) getActivity()).getApplicationContext();
+                FrameLayout.LayoutParams layoutParamsFab1 = (FrameLayout.LayoutParams) miniFab1.getLayoutParams();
+                FrameLayout.LayoutParams layoutParamsFab2 = (FrameLayout.LayoutParams) miniFab2.getLayoutParams();
+                FrameLayout.LayoutParams layoutParamsFab3 = (FrameLayout.LayoutParams) miniFab3.getLayoutParams();
+                if (fabButtonActive){
+                    fabButtonActive = false;
+                    // miniFab1
+                    layoutParamsFab1.rightMargin -= (int) (miniFab1.getWidth() * 1.7);
+                    layoutParamsFab1.bottomMargin -= (int) (miniFab1.getHeight() * 0.25);
+                    miniFab1.setLayoutParams(layoutParamsFab1);
+                    Animation hideFab1 = AnimationUtils.loadAnimation(application, R.anim.fab1_hide);
+                    miniFab1.startAnimation(hideFab1);
+                    miniFab1.setClickable(false);
+                    // miniFab2
+                    layoutParamsFab2.rightMargin -= (int) (miniFab2.getWidth() * 1.5);
+                    layoutParamsFab2.bottomMargin -= (int) (miniFab2.getHeight() * 1.5);
+                    miniFab2.setLayoutParams(layoutParamsFab2);
+                    Animation hideFab2 = AnimationUtils.loadAnimation(application, R.anim.fab2_hide);
+                    miniFab2.startAnimation(hideFab2);
+                    miniFab2.setClickable(false);
+                    // miniFab3
+                    layoutParamsFab3.rightMargin -= (int) (miniFab3.getWidth() * 0.25);
+                    layoutParamsFab3.bottomMargin -= (int) (miniFab3.getHeight() * 1.75);
+                    miniFab3.setLayoutParams(layoutParamsFab3);
+                    Animation hideFab3 = AnimationUtils.loadAnimation(application, R.anim.fab3_hide);
+                    miniFab3.startAnimation(hideFab3);
+                    miniFab3.setClickable(false);
+                }else {
+                    fabButtonActive = true;
+                    // miniFab1
+                    layoutParamsFab1.rightMargin += (int) (miniFab1.getWidth() * 1.7);
+                    layoutParamsFab1.bottomMargin += (int) (miniFab1.getHeight() * 0.25);
+                    miniFab1.setLayoutParams(layoutParamsFab1);
+                    Animation showFab1 = AnimationUtils.loadAnimation(application, R.anim.fab1_show);
+                    miniFab1.startAnimation(showFab1);
+                    miniFab1.setClickable(true);
+                    // miniFab2
+                    layoutParamsFab2.rightMargin += (int) (miniFab2.getWidth() * 1.5);
+                    layoutParamsFab2.bottomMargin += (int) (miniFab2.getHeight() * 1.5);
+                    miniFab2.setLayoutParams(layoutParamsFab2);
+                    Animation showFab2 = AnimationUtils.loadAnimation(application, R.anim.fab2_show);
+                    miniFab2.startAnimation(showFab2);
+                    miniFab2.setClickable(true);
+                    // miniFab3
+                    layoutParamsFab3.rightMargin += (int) (miniFab3.getWidth() * 0.25);
+                    layoutParamsFab3.bottomMargin += (int) (miniFab3.getHeight() * 1.7);
+                    miniFab3.setLayoutParams(layoutParamsFab3);
+                    Animation showFab3 = AnimationUtils.loadAnimation(application, R.anim.fab3_show);
+                    miniFab3.startAnimation(showFab3);
+                    miniFab3.setClickable(true);
+                }
+// Animation hide_fab_1 = AnimationUtils.loadAnimation(((MainActivity) getActivity()).getApplication(), R.anim.fab1_hide);
             }
         });
 

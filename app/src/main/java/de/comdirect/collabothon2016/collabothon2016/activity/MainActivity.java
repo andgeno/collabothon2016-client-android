@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private GroupService groupService;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

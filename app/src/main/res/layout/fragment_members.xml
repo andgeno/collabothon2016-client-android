@@ -36,13 +36,15 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_weight="1"
-                android:src="@drawable/heisenberg_1x" />
+                android:src="@drawable/heisenberg_1x"
+                android:layout_gravity="center"/>
             <ImageView
                 android:id="@+id/member_1_payment"
                 android:layout_width="64dp"
                 android:layout_height="23dp"
                 android:layout_weight="1"
-                android:src="@drawable/ic_payment_paid_small" />
+                android:src="@drawable/ic_payment_paid_small"
+                android:layout_gravity="center"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -61,13 +63,15 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_weight="1"
-                android:src="@drawable/man2" />
+                android:src="@drawable/man2"
+                android:layout_gravity="center"/>
             <ImageView
                 android:id="@+id/member_2_payment"
                 android:layout_width="64dp"
                 android:layout_height="23dp"
                 android:layout_weight="1"
-                android:src="@drawable/ic_payment_paid_small" />
+                android:src="@drawable/ic_payment_paid_small"
+                android:layout_gravity="center"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -86,13 +90,15 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_weight="1"
-                android:src="@drawable/woman_icon" />
+                android:src="@drawable/woman_icon"
+                android:layout_gravity="center"/>
             <ImageView
                 android:id="@+id/member_3_payment"
                 android:layout_width="64dp"
                 android:layout_height="23dp"
                 android:layout_weight="1"
-                android:src="@drawable/ic_payment_due_small" />
+                android:src="@drawable/ic_payment_due_small"
+                android:layout_gravity="center" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -122,13 +128,15 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_weight="1"
-                android:src="@drawable/woen2" />
+                android:src="@drawable/woen2"
+                android:layout_gravity="center"/>
             <ImageView
                 android:id="@+id/member_4_payment"
                 android:layout_width="64dp"
                 android:layout_height="23dp"
                 android:layout_weight="1"
-                android:src="@drawable/ic_payment_paid_small" />
+                android:src="@drawable/ic_payment_paid_small"
+                android:layout_gravity="center"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -147,13 +155,15 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_weight="1"
-                android:src="@drawable/glassesman" />
+                android:src="@drawable/glassesman"
+                android:layout_gravity="center"/>
             <ImageView
                 android:id="@+id/member_5_payment"
                 android:layout_width="64dp"
                 android:layout_height="23dp"
                 android:layout_weight="1"
-                android:src="@drawable/ic_payment_due_small" />
+                android:src="@drawable/ic_payment_due_small"
+                android:layout_gravity="center"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -172,12 +182,14 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_weight="1"
-                android:src="@drawable/glassesman" />
+                android:src="@drawable/glassesman"
+                android:layout_gravity="center"/>
             <ImageView
                 android:layout_width="64dp"
                 android:layout_height="23dp"
                 android:layout_weight="1"
-                android:src="@drawable/ic_payment_due_small" />
+                android:src="@drawable/ic_payment_due_small"
+                android:layout_gravity="center"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
