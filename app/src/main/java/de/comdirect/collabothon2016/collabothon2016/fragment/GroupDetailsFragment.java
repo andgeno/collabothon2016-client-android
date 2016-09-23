@@ -50,6 +50,7 @@ public class GroupDetailsFragment extends Fragment implements ActionBar.TabListe
 
         pagerAdapter = new GroupPagerAdapter(getActivity().getSupportFragmentManager());
         pager.setAdapter(pagerAdapter);
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabLayout.setupWithViewPager(pager, true);
 
         return rootView;
