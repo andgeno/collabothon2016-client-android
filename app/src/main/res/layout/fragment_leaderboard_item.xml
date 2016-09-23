@@ -21,8 +21,8 @@
 
             <ImageView
                 android:id="@+id/user_icon"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_weight="0"
                 android:src="@drawable/ic_account_circle_white_48dp"
                 android:padding="16dp" />
@@ -30,15 +30,17 @@
             <TextView
                 android:id="@+id/user_name"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_gravity="center_vertical"
                 android:text="Group Name"
                 android:textStyle="normal|bold"
+                android:textSize="20dp"
                 android:padding="16dp" />
 
             <FrameLayout
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_weight="0"
                 android:background="#00BBD3">
 
