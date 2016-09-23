@@ -30,12 +30,12 @@ import de.comdirect.collabothon2016.collabothon2016.viewadapter.GroupItemAdapter
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link GroupOverviewFragment.OnFragmentInteractionListener} interface
+ * {@link MyGroupsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link GroupOverviewFragment#newInstance} factory method to
+ * Use the {@link MyGroupsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GroupOverviewFragment extends Fragment {
+public class MyGroupsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -62,7 +62,7 @@ public class GroupOverviewFragment extends Fragment {
 
     private List<Group> groups;
 
-    public GroupOverviewFragment() {
+    public MyGroupsFragment() {
         // Required empty public constructor
     }
 
@@ -72,11 +72,11 @@ public class GroupOverviewFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment GroupOverviewFragment.
+     * @return A new instance of fragment MyGroupsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static GroupOverviewFragment newInstance(String param1, String param2) {
-        GroupOverviewFragment fragment = new GroupOverviewFragment();
+    public static MyGroupsFragment newInstance(String param1, String param2) {
+        MyGroupsFragment fragment = new MyGroupsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -96,7 +96,7 @@ public class GroupOverviewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_group_overview, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_my_groups, container, false);
         ButterKnife.bind(this, rootView);
 
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("My Groups"); // FIXME Hack

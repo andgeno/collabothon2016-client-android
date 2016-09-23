@@ -21,14 +21,14 @@ import butterknife.ButterKnife;
 import de.comdirect.collabothon2016.collabothon2016.R;
 import de.comdirect.collabothon2016.collabothon2016.event.GroupSelectedEvent;
 import de.comdirect.collabothon2016.collabothon2016.fragment.GroupDetailsFragment;
-import de.comdirect.collabothon2016.collabothon2016.fragment.GroupOverviewFragment;
+import de.comdirect.collabothon2016.collabothon2016.fragment.MyGroupsFragment;
 import de.comdirect.collabothon2016.collabothon2016.fragment.VotingFragment;
 import de.comdirect.collabothon2016.collabothon2016.model.Group;
 import de.comdirect.collabothon2016.collabothon2016.service.GroupService;
 
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
-        GroupOverviewFragment.OnFragmentInteractionListener,
+        MyGroupsFragment.OnFragmentInteractionListener,
         VotingFragment.OnFragmentInteractionListener {
 
     @BindView(R.id.nav_drawer_content)
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements
         groupService = GroupService.init(GroupService.ENDPOINT);
 
         setSupportActionBar(toolbar);
+
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -140,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private void onShowGroupOverview() {
         getSupportActionBar().setTitle("My Groups");
-        GroupOverviewFragment frag = GroupOverviewFragment.newInstance(null, null);
+        MyGroupsFragment frag = MyGroupsFragment.newInstance(null, null);
         String tag = frag.getClass().getSimpleName();
 
         FragmentManager fm = getSupportFragmentManager();
