@@ -74,7 +74,6 @@ public class OverviewFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_overview, container, false);
 
         group = EventBus.getDefault().getStickyEvent(GroupSelectedEvent.class).group;
-
         GroupItemAdapter.ViewHolder viewHolder = new GroupItemAdapter.ViewHolder(rootView);
         GroupItemAdapter.setViewByGroup(viewHolder, group);
 
