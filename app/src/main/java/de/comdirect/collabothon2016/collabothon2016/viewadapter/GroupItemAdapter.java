@@ -80,22 +80,8 @@ public class GroupItemAdapter extends RecyclerView.Adapter<GroupItemAdapter.View
         // - replace the contents of the view with that element
 //        holder.mTextView.setText(mGroups[position]);
 
-        Context ctx = holder.view.getContext();
-
-        int memberCount = 0;
-//        Log.e(BuildConfig.LOG_TAG, "binding item: " + position);
         Group group = mGroups.get(position);
-        holder.groupAvatar.setImageDrawable(ImageUtils.getGroupAvatar(ctx, group.id));
-        holder.groupName.setText(group.groupName);
-        if (group.user != null) {
-            memberCount = group.user.size();
-        }
-        holder.memberCount.setText("" + memberCount);
-        holder.memberFirstRank.setImageDrawable(ImageUtils.getUserAvatarWithCrest(ctx, 1));
-        holder.memberSecondRank.setImageDrawable(ImageUtils.getUserAvatarWithCrest(ctx, 2));
-        holder.memberThirdRank.setImageDrawable(ImageUtils.getUserAvatarWithCrest(ctx, 3));
-        holder.groupDescription.setText(group.description);
-
+        setViewByGroup(holder, group);
         holder.view.setOnClickListener(v -> {
             Log.d(BuildConfig.LOG_TAG, "yay");
             mListener.groupItemSelected(group);
@@ -106,5 +92,23 @@ public class GroupItemAdapter extends RecyclerView.Adapter<GroupItemAdapter.View
     @Override
     public int getItemCount() {
         return mGroups.size();
+    }
+
+
+    public static void setViewByGroup(ViewHolder holder, Group group) {
+        Context ctx = holder.view.getContext();
+
+        int memberCount = 0;
+//        Log.e(BuildConfig.LOG_TAG, "binding item: " + position);
+        holder.groupAvatar.setImageDrawable(ImageUtils.getGroupAvatar(ctx, group.id));
+        holder.groupName.setText(group.groupName);
+        if (group.user != null) {
+            memberCount = group.user.size();
+        }
+        holder.memberCount.setText("" + memberCount);
+        holder.memberFirstRank.setImageDrawable(ImageUtils.getUserAvatarWithCrest(ctx, 1));
+        holder.memberSecondRank.setImageDrawable(ImageUtils.getUserAvatarWithCrest(ctx, 2));
+        holder.memberThirdRank.setImageDrawable(ImageUtils.getUserAvatarWithCrest(ctx, 3));
+        holder.groupDescription.setText(group.description);
     }
 }

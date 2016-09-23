@@ -8,7 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.greenrobot.eventbus.EventBus;
+
 import de.comdirect.collabothon2016.collabothon2016.R;
+import de.comdirect.collabothon2016.collabothon2016.event.GroupSelectedEvent;
+import de.comdirect.collabothon2016.collabothon2016.model.Group;
+import de.comdirect.collabothon2016.collabothon2016.viewadapter.GroupItemAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +34,8 @@ public class OverviewFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private Group group;
 
     public OverviewFragment() {
         // Required empty public constructor
@@ -62,10 +69,16 @@ public class OverviewFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_overview, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_overview, container, false);
+
+        group = EventBus.getDefault().getStickyEvent(GroupSelectedEvent.class).group;
+
+        GroupItemAdapter.ViewHolder viewHolder = new GroupItemAdapter.ViewHolder(rootView);
+        GroupItemAdapter.setViewByGroup(viewHolder, group);
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -81,8 +94,7 @@ public class OverviewFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
         }
     }
 
