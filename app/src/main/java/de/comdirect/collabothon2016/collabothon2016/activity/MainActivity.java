@@ -24,6 +24,7 @@ import de.comdirect.collabothon2016.collabothon2016.event.GroupSelectedEvent;
 import de.comdirect.collabothon2016.collabothon2016.fragment.GroupDetailsFragment;
 import de.comdirect.collabothon2016.collabothon2016.fragment.GroupOverviewFragment;
 import de.comdirect.collabothon2016.collabothon2016.fragment.VotingFragment;
+import de.comdirect.collabothon2016.collabothon2016.model.Group;
 import de.comdirect.collabothon2016.collabothon2016.service.GroupService;
 
 public class MainActivity extends AppCompatActivity implements
@@ -153,6 +154,25 @@ public class MainActivity extends AppCompatActivity implements
         ft.commit();
     }
 
+    private void onShowGroupDetails(Group group) {
+        GroupSelectedEvent event = new GroupSelectedEvent();
+        event.group = group;
+        EventBus.getDefault().postSticky(event);
+
+        getSupportActionBar().setTitle(group.groupName);
+        GroupDetailsFragment frag = GroupDetailsFragment.newInstance(null, null);
+        String tag = frag.getClass().getSimpleName();
+
+        FragmentManager fm = getSupportFragmentManager();
+        boolean hasBackStackEntries = fm.getBackStackEntryCount() > 0;
+
+        FragmentTransaction ft = fm.beginTransaction();
+//        if (hasBackStackEntries) {
+        ft.addToBackStack(null);
+//        }
+        ft.replace(R.id.nav_drawer_content, frag, tag);
+        ft.commit();
+    }
 
     private void onShowIsinBrowser() {
         getSupportActionBar().setTitle("ISIN Browser");
@@ -170,35 +190,40 @@ public class MainActivity extends AppCompatActivity implements
         ft.commit();
     }
 
-    public void onShowGroupDetails(int groupId) {
-        GroupSelectedEvent event = new GroupSelectedEvent();
-        event.groupId = groupId;
-
-//        Response<ResponBody> body = groupService.getGroup(id);
-//        body.body();
-
-
-        EventBus.getDefault().postSticky(event);
-//        EventBus.getDefault().getStickyEvent(GroupSelectedEvent.class).id
-
-        getSupportActionBar().setTitle("GRUPPENNAMMMMMEEE");
-        GroupDetailsFragment frag = GroupDetailsFragment.newInstance(null, null);
-        String tag = frag.getClass().getSimpleName();
-
-        FragmentManager fm = getSupportFragmentManager();
-        boolean hasBackStackEntries = fm.getBackStackEntryCount() > 0;
-
-        FragmentTransaction ft = fm.beginTransaction();
-        if (hasBackStackEntries) {
-            ft.addToBackStack(null);
-        }
-        ft.replace(R.id.nav_drawer_content, frag, tag);
-        ft.commit();
-    }
+//    public void onShowGroupDetails(int groupId) {
+//        GroupSelectedEvent event = new GroupSelectedEvent();
+//        event.groupId = groupId;
+//
+////        Response<ResponBody> body = groupService.getGroup(id);
+////        body.body();
+//
+//
+//        EventBus.getDefault().postSticky(event);
+////        EventBus.getDefault().getStickyEvent(GroupSelectedEvent.class).id
+//
+//        getSupportActionBar().setTitle("GRUPPENNAMMMMMEEE");
+//        GroupDetailsFragment frag = GroupDetailsFragment.newInstance(null, null);
+//        String tag = frag.getClass().getSimpleName();
+//
+//        FragmentManager fm = getSupportFragmentManager();
+//        boolean hasBackStackEntries = fm.getBackStackEntryCount() > 0;
+//
+//        FragmentTransaction ft = fm.beginTransaction();
+//        if (hasBackStackEntries) {
+//            ft.addToBackStack(null);
+//        }
+//        ft.replace(R.id.nav_drawer_content, frag, tag);
+//        ft.commit();
+//    }
 
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+    }
+
+    @Override
+    public void groupItemSelected(Group group) {
+        onShowGroupDetails(group);
     }
 
 }

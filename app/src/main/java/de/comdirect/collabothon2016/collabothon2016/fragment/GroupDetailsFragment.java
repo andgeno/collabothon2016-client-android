@@ -7,12 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.greenrobot.eventbus.EventBus;
-
 import butterknife.ButterKnife;
 import de.comdirect.collabothon2016.collabothon2016.R;
-import de.comdirect.collabothon2016.collabothon2016.activity.MainActivity;
-import de.comdirect.collabothon2016.collabothon2016.event.GroupSelectedEvent;
 
 /**
  * Created by A3286390 on 22.09.2016.
@@ -22,7 +18,6 @@ public class GroupDetailsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private static int groupId;
 
     public GroupDetailsFragment() {
         // Required empty public constructor
@@ -35,7 +30,7 @@ public class GroupDetailsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle("GRUPPENNAMMMMMEEE");
+//        ((MainActivity) getActivity()).getSupportActionBar().setTitle("GRUPPENNAMMMMMEEE");
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_group_overview, container, false);
         ButterKnife.bind(this, rootView);
@@ -52,7 +47,6 @@ public class GroupDetailsFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static GroupDetailsFragment newInstance(String param1, String param2) {
-        groupId = EventBus.getDefault().getStickyEvent(GroupSelectedEvent.class).groupId;
         GroupDetailsFragment fragment = new GroupDetailsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);

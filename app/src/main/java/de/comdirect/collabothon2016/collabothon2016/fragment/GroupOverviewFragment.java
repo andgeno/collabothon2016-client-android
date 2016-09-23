@@ -21,6 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.comdirect.collabothon2016.collabothon2016.R;
+import de.comdirect.collabothon2016.collabothon2016.activity.MainActivity;
 import de.comdirect.collabothon2016.collabothon2016.event.GroupsReceivedEvent;
 import de.comdirect.collabothon2016.collabothon2016.model.Group;
 import de.comdirect.collabothon2016.collabothon2016.viewadapter.GroupItemAdapter;
@@ -98,6 +99,8 @@ public class GroupOverviewFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_group_overview, container, false);
         ButterKnife.bind(this, rootView);
 
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("My Groups"); // FIXME Hack
+
         groups = EventBus.getDefault().getStickyEvent(GroupsReceivedEvent.class).groups;
 
         // use this setting to improve performance if you know that changes
@@ -109,7 +112,7 @@ public class GroupOverviewFragment extends Fragment {
         groupsRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        mAdapter = new GroupItemAdapter(groups);
+        mAdapter = new GroupItemAdapter(groups, group -> mListener.groupItemSelected(group));
         groupsRecyclerView.setAdapter(mAdapter);
 
 //        myGroupButton1.setOnClickListener(new View.OnClickListener() {
@@ -183,5 +186,7 @@ public class GroupOverviewFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+
+        void groupItemSelected(Group group);
     }
 }

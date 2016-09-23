@@ -13,8 +13,9 @@ import rx.Observable;
 public class GroupService {
     private static final String ENDPOINT_SEBASTIAN = "http://172.31.127.74:8090/";
     private static final String ENDPOINT_ANDREAS = "http://172.31.124.112:8090/";
+    private static final String ENDPOINT_ANDREAS_HOTSPOT = "http://192.168.43.27:8090/";
 
-    public static final String ENDPOINT = ENDPOINT_ANDREAS;
+    public static final String ENDPOINT = ENDPOINT_ANDREAS_HOTSPOT;
 
     private static GroupService instance;
     private RestService service;

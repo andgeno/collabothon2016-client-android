@@ -2,6 +2,7 @@ package de.comdirect.collabothon2016.collabothon2016.viewadapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,19 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.comdirect.collabothon2016.collabothon2016.BuildConfig;
 import de.comdirect.collabothon2016.collabothon2016.R;
 import de.comdirect.collabothon2016.collabothon2016.model.Group;
 import de.comdirect.collabothon2016.collabothon2016.util.ImageUtils;
 
 public class GroupItemAdapter extends RecyclerView.Adapter<GroupItemAdapter.ViewHolder> {
+
+    public interface OnGroupItemSelected {
+        void groupItemSelected(Group group);
+    }
+
+    private OnGroupItemSelected mListener;
+
     private List<Group> mGroups;
 
     // Provide a reference to the views for each data item
@@ -49,8 +58,9 @@ public class GroupItemAdapter extends RecyclerView.Adapter<GroupItemAdapter.View
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public GroupItemAdapter(List<Group> groups) {
+    public GroupItemAdapter(List<Group> groups, OnGroupItemSelected listener) {
         mGroups = groups;
+        mListener = listener;
     }
 
     // Create new views (invoked by the layout manager)
@@ -70,7 +80,6 @@ public class GroupItemAdapter extends RecyclerView.Adapter<GroupItemAdapter.View
         // - replace the contents of the view with that element
 //        holder.mTextView.setText(mGroups[position]);
 
-
         Context ctx = holder.view.getContext();
 
         int memberCount = 0;
@@ -86,6 +95,11 @@ public class GroupItemAdapter extends RecyclerView.Adapter<GroupItemAdapter.View
         holder.memberSecondRank.setImageDrawable(ImageUtils.getUserAvatarWithCrest(ctx, 2));
         holder.memberThirdRank.setImageDrawable(ImageUtils.getUserAvatarWithCrest(ctx, 3));
         holder.groupDescription.setText(group.description);
+
+        holder.view.setOnClickListener(v -> {
+            Log.d(BuildConfig.LOG_TAG, "yay");
+            mListener.groupItemSelected(group);
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)
