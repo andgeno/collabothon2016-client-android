@@ -92,36 +92,18 @@
                 </Button>
             </LinearLayout>
 
-            <!--<Button-->
-                <!--android:id="@+id/email_register_button"-->
-                <!--style="?android:textAppearanceSmall"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="16dp"-->
-                <!--android:text="@string/action_sign_in"-->
-                <!--android:textStyle="bold" />-->
-
-            <!--<Button-->
-                <!--android:id="@+id/email_sign_in_button"-->
-                <!--style="?android:textAppearanceSmall"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="16dp"-->
-                <!--android:text="@string/action_sign_in"-->
-                <!--android:textStyle="bold" />-->
-
             <TextView
                 android:id="@+id/forget_pw"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Forget your password?"
+                android:text="@string/forget_password"
                 android:clickable="true"
                 android:autoLink="web"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:padding="25px"
-                android:textAppearance="?android:attr/textAppearanceSmall"/>
+                android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
