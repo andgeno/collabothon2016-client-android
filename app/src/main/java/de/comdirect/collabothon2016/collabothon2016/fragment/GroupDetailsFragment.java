@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -25,6 +26,8 @@ public class GroupDetailsFragment extends Fragment implements ActionBar.TabListe
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    @BindView(R.id.tabLayout)
+    TabLayout tabLayout;
     @BindView(R.id.pager)
     ViewPager pager;
 
@@ -46,27 +49,17 @@ public class GroupDetailsFragment extends Fragment implements ActionBar.TabListe
         ButterKnife.bind(this, rootView);
 
         pagerAdapter = new GroupPagerAdapter(getActivity().getSupportFragmentManager());
-
-        ActionBar actionBar = getActivity().getActionBar();
-        actionBar.setHomeButtonEnabled(false);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
         pager.setAdapter(pagerAdapter);
-        pager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                actionBar.setSelectedNavigationItem(position);
-            }
-        });
-
-        for (int i = 0; i < pagerAdapter.getCount(); i++) {
-            actionBar.addTab(actionBar.newTab()
-                    .setText(pagerAdapter.getPageTitle(i))
-                    .setTabListener(this));
-        }
+        tabLayout.setupWithViewPager(pager, true);
 
         return rootView;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        pager.setAdapter(null);
+        pagerAdapter = null;
     }
 
     /**

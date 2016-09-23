@@ -21,7 +21,10 @@ import butterknife.ButterKnife;
 import de.comdirect.collabothon2016.collabothon2016.R;
 import de.comdirect.collabothon2016.collabothon2016.event.GroupSelectedEvent;
 import de.comdirect.collabothon2016.collabothon2016.fragment.GroupDetailsFragment;
+import de.comdirect.collabothon2016.collabothon2016.fragment.LeaderboardFragment;
 import de.comdirect.collabothon2016.collabothon2016.fragment.MyGroupsFragment;
+import de.comdirect.collabothon2016.collabothon2016.fragment.OverviewFragment;
+import de.comdirect.collabothon2016.collabothon2016.fragment.PortfolioFragment;
 import de.comdirect.collabothon2016.collabothon2016.fragment.VotingFragment;
 import de.comdirect.collabothon2016.collabothon2016.model.Group;
 import de.comdirect.collabothon2016.collabothon2016.service.GroupService;
@@ -29,7 +32,10 @@ import de.comdirect.collabothon2016.collabothon2016.service.GroupService;
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
         MyGroupsFragment.OnFragmentInteractionListener,
-        VotingFragment.OnFragmentInteractionListener {
+        OverviewFragment.OnFragmentInteractionListener,
+        PortfolioFragment.OnFragmentInteractionListener,
+        VotingFragment.OnFragmentInteractionListener,
+        LeaderboardFragment.OnFragmentInteractionListener {
 
     @BindView(R.id.nav_drawer_content)
     FrameLayout frameLayout;
