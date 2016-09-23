@@ -15,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.comdirect.collabothon2016.collabothon2016.R;
 import de.comdirect.collabothon2016.collabothon2016.model.Vote;
+import de.comdirect.collabothon2016.collabothon2016.util.ImageUtils;
 
 public class VoteItemAdapter extends RecyclerView.Adapter<VoteItemAdapter.ViewHolder> {
 
@@ -97,6 +98,8 @@ public class VoteItemAdapter extends RecyclerView.Adapter<VoteItemAdapter.ViewHo
 
         holder.voteStockName.setText(vote.title);
         holder.voteStockIsin.setText(vote.wertpapier);
+        holder.voteStockIcon.setImageDrawable(ImageUtils.getStockByIsin(ctx, vote.wertpapier));
+
     }
 
 }

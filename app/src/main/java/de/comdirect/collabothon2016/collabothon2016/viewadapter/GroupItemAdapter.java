@@ -103,9 +103,9 @@ public class GroupItemAdapter extends RecyclerView.Adapter<GroupItemAdapter.View
             memberCount = group.user.size();
         }
         holder.memberCount.setText("" + memberCount);
-        holder.memberFirstRank.setImageDrawable(ImageUtils.getUserAvatarWithCrest(ctx, 1));
-        holder.memberSecondRank.setImageDrawable(ImageUtils.getUserAvatarWithCrest(ctx, 2));
-        holder.memberThirdRank.setImageDrawable(ImageUtils.getUserAvatarWithCrest(ctx, 3));
+        holder.memberFirstRank.setImageDrawable(ImageUtils.getUserAvatarWithCrest(ctx, group.user.get(0).nutzerId));
+        holder.memberSecondRank.setImageDrawable(ImageUtils.getUserAvatarWithCrest(ctx, group.user.get(1).nutzerId));
+        holder.memberThirdRank.setImageDrawable(ImageUtils.getUserAvatarWithCrest(ctx, group.user.get(2).nutzerId));
         holder.groupDescription.setText(group.description);
     }
 }

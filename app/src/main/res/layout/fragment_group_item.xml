@@ -37,7 +37,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Group Name" />
+                    android:text="Group Name"
+                    android:textStyle="normal|bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
