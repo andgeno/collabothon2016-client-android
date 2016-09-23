@@ -11,6 +11,10 @@
             android:icon="@drawable/ic_account_circle_white_18dp"
             android:title="Account" />
         <item
+            android:id="@+id/nav_item_open_wallet"
+            android:icon="@drawable/ic_account_balance_wallet_black_24dp"
+            android:title="Open Wallet" />
+        <item
             android:id="@+id/nav_item_change_avatar"
             android:icon="@drawable/ic_account_box_black_24dp"
             android:title="Change Avatar" />

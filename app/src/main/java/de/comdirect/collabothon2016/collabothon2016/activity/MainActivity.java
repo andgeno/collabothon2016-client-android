@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements
         ft.commit();
     }
 
+
     private void onShowIsinBrowser() {
         getSupportActionBar().setTitle("ISIN Browser");
         VotingFragment frag = VotingFragment.newInstance(null, null);
