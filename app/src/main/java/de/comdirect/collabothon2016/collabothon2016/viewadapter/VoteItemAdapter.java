@@ -1,12 +1,15 @@
 package de.comdirect.collabothon2016.collabothon2016.viewadapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -15,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.comdirect.collabothon2016.collabothon2016.R;
 import de.comdirect.collabothon2016.collabothon2016.model.Vote;
+import de.comdirect.collabothon2016.collabothon2016.util.ImageUtils;
 
 public class VoteItemAdapter extends RecyclerView.Adapter<VoteItemAdapter.ViewHolder> {
 
@@ -39,6 +43,8 @@ public class VoteItemAdapter extends RecyclerView.Adapter<VoteItemAdapter.ViewHo
         public TextView voteStockIsin;
         @BindView(R.id.vote_invest_button)
         public Button voteInvestButton;
+        @BindView(R.id.voteBackgroundBox)
+        public LinearLayout voteBackgroundBox;
 
         public View view;
 
@@ -76,14 +82,26 @@ public class VoteItemAdapter extends RecyclerView.Adapter<VoteItemAdapter.ViewHo
         holder.view.setOnClickListener(v -> {
             mListener.voteItemSelected(vote);
         });
+
+        holder.voteBackgroundBox.setBackground(new ColorDrawable(Color.WHITE));
+
+        holder.voteInvestButton.setOnClickListener(v -> {
+            holder.voteBackgroundBox.setBackground(new ColorDrawable(Color.rgb(0, 170, 0)));
+        });
+
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mVotes.size();
+        return mVotes == null ? 0 : mVotes.size();
     }
 
+    @Override
+    public long getItemId(int position) {
+        return mVotes.get(position).userId;
+    }
 
     public static void setViewByVote(ViewHolder holder, Vote vote) {
         Context ctx = holder.view.getContext();
@@ -91,8 +109,10 @@ public class VoteItemAdapter extends RecyclerView.Adapter<VoteItemAdapter.ViewHo
         int memberCount = 0;
 //        Log.e(BuildConfig.LOG_TAG, "binding item: " + position);
 
-        holder.voteStockName.setText(vote.stockName);
-        holder.voteStockIsin.setText(vote.stockIsin);
+        holder.voteStockName.setText(vote.title);
+        holder.voteStockIsin.setText(vote.wertpapier);
+        holder.voteStockIcon.setImageDrawable(ImageUtils.getStockByIsin(ctx, vote.wertpapier));
+
     }
 
 }

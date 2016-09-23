@@ -7,9 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.comdirect.collabothon2016.collabothon2016.R;
 import de.comdirect.collabothon2016.collabothon2016.event.GroupSelectedEvent;
 import de.comdirect.collabothon2016.collabothon2016.model.Group;
@@ -36,6 +39,21 @@ public class OverviewFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private Group group;
+
+    @BindView(R.id.interval)
+    public TextView interval;
+    @BindView(R.id.interval_amount)
+    public TextView intervalAmount;
+    @BindView(R.id.next_period_in)
+    public TextView nextPeriodIn;
+    @BindView(R.id.investing_since)
+    public TextView investingSince;
+    @BindView(R.id.payment_status_member_count)
+    public TextView paymentStatusMemberCount;
+    @BindView(R.id.payment_status_member_paid)
+    public TextView paymentStatusMemberPaid;
+    @BindView(R.id.overall_investment)
+    public TextView overallInvestment;
 
     public OverviewFragment() {
         // Required empty public constructor
@@ -72,11 +90,25 @@ public class OverviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_overview, container, false);
+        ButterKnife.bind(this, rootView);
 
         group = EventBus.getDefault().getStickyEvent(GroupSelectedEvent.class).group;
         GroupItemAdapter.ViewHolder viewHolder = new GroupItemAdapter.ViewHolder(rootView);
         GroupItemAdapter.setViewByGroup(viewHolder, group);
 
+        int numMembersPaid = 0; // TODO - DepotEngine aufrufen fuer Anzahl Bezahler in Gruppe
+        int numMembersInGroup = 0;
+
+        interval.setText(group.interval);
+        intervalAmount.setText("$" + group.amount);
+        nextPeriodIn.setText(group.nextPeriod);
+        investingSince.setText(group.investingSince);
+        paymentStatusMemberPaid.setText("" + numMembersPaid);
+        if (group.user != null) {
+            numMembersInGroup = group.user.size();
+        }
+        paymentStatusMemberCount.setText("" + numMembersInGroup);
+        overallInvestment.setText("$" + group.amountOverall);
         return rootView;
     }
 

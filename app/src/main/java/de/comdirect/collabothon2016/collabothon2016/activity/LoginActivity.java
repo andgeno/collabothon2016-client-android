@@ -44,6 +44,7 @@ import de.comdirect.collabothon2016.collabothon2016.R;
 import de.comdirect.collabothon2016.collabothon2016.event.GroupsReceivedEvent;
 import de.comdirect.collabothon2016.collabothon2016.model.Group;
 import de.comdirect.collabothon2016.collabothon2016.service.GroupService;
+import de.comdirect.collabothon2016.collabothon2016.service.VotingService;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 import rx.Subscriber;
@@ -83,6 +84,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mLoginFormView;
 
     private GroupService groupService;
+    private VotingService votingService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +92,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         setContentView(R.layout.activity_login);
 
         groupService = GroupService.init(GroupService.ENDPOINT);
+        votingService = VotingService.init(VotingService.ENDPOINT);
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);

@@ -4,9 +4,14 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Vote {
 
-    public boolean isInvested;
-    public String stockName;
-    public String stockIsin;
+    public long userId;
+    public long indexInVote;
+    public String title; // stock name
+    public String comment;
+    public long votes;
+    public String wertpapier; // stock isin
+
+//    public boolean isInvested;
 
     @Override
     public String toString() {
