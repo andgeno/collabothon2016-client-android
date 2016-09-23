@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -128,21 +127,21 @@ public class MyGroupsFragment extends Fragment {
             public void onClick(View view) {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
-                Toast.makeText(getContext(), "ACTION", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "ACTION", Toast.LENGTH_SHORT).show();
             }
         });
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Toast.makeText(getContext(), "Refreshing", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Refreshing", Toast.LENGTH_SHORT).show();
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
                     }
-                }, 2500);
+                }, 1500);
             }
         });
 

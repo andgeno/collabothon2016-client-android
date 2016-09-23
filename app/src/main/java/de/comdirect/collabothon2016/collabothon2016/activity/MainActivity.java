@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -114,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Toast.makeText(this, "Logout performed", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Logout performed", Toast.LENGTH_SHORT).show();
             finish();
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
