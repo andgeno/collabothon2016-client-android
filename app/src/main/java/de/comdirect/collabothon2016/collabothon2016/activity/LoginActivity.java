@@ -30,9 +30,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -41,6 +41,7 @@ import java.util.List;
 
 import de.comdirect.collabothon2016.collabothon2016.BuildConfig;
 import de.comdirect.collabothon2016.collabothon2016.R;
+import de.comdirect.collabothon2016.collabothon2016.event.GroupsReceivedEvent;
 import de.comdirect.collabothon2016.collabothon2016.model.Group;
 import de.comdirect.collabothon2016.collabothon2016.service.GroupService;
 import okhttp3.ResponseBody;
@@ -361,14 +362,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 e.printStackTrace();
                             }
 
-                            Gson gson = new Gson();
-                            JsonParser parser = new JsonParser();
-                            JsonElement elem = parser.parse(json);
-
                             Type collectionType = new TypeToken<List<Group>>() {
                             }.getType();
-                            List<Group> groups = gson.fromJson(json, collectionType);
+                            List<Group> groups = new Gson().fromJson(json, collectionType);
                             Log.e(BuildConfig.LOG_TAG, "GROUPS response: " + groups);
+
+                            GroupsReceivedEvent event = new GroupsReceivedEvent();
+                            event.groups = groups;
+                            EventBus.getDefault().postSticky(event);
                         }
                     });
 
