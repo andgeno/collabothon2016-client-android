@@ -98,6 +98,7 @@ public class OverviewFragment extends Fragment {
 
         int numMembersPaid = 3; // TODO - DepotEngine aufrufen fuer Anzahl Bezahler in Gruppe
         int numMembersInGroup = 5;
+        double amountOverall = 300; //group.amountOverall;
 
         interval.setText(group.interval);
         intervalAmount.setText("$" + group.amount);
@@ -108,7 +109,7 @@ public class OverviewFragment extends Fragment {
             numMembersInGroup = group.user.size();
         }
         paymentStatusMemberCount.setText("" + numMembersInGroup);
-        overallInvestment.setText("$" + group.amountOverall);
+        overallInvestment.setText("$" + amountOverall);
         return rootView;
     }
 

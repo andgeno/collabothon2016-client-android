@@ -50,7 +50,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textAlignment="center"
-                    android:text="17" />
+                    android:text="17"
+                    android:textSize="36sp"
+                    android:textStyle="normal|bold" />
             </FrameLayout>
         </LinearLayout>
 
