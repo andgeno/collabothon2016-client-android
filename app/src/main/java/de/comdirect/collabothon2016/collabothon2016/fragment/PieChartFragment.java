@@ -62,7 +62,8 @@ public class PieChartFragment extends Fragment implements OnChartValueSelectedLi
     protected Typeface mTfLight;
 
     protected String[] mParties = new String[]{
-            "Ren. Energy", "Technology", "Rare Minerals", "Infrastructure"
+            "Social Networks", "Mobility and Drones", "Entertainment", "Online Shopping"
+           // "Ren. Energy", "Technology", "Rare Minerals", "Infrastructure"
     };
 
     public PieChartFragment() {

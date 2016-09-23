@@ -96,8 +96,8 @@ public class OverviewFragment extends Fragment {
         GroupItemAdapter.ViewHolder viewHolder = new GroupItemAdapter.ViewHolder(rootView);
         GroupItemAdapter.setViewByGroup(viewHolder, group);
 
-        int numMembersPaid = 0; // TODO - DepotEngine aufrufen fuer Anzahl Bezahler in Gruppe
-        int numMembersInGroup = 0;
+        int numMembersPaid = 3; // TODO - DepotEngine aufrufen fuer Anzahl Bezahler in Gruppe
+        int numMembersInGroup = 5;
 
         interval.setText(group.interval);
         intervalAmount.setText("$" + group.amount);
