@@ -6,12 +6,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
-import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -27,7 +23,6 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
@@ -39,14 +34,14 @@ public class PieChartActivity extends FragmentActivity implements OnSeekBarChang
         OnChartValueSelectedListener {
 
     private PieChart mChart;
- //   private SeekBar mSeekBarX, mSeekBarY;
+    //   private SeekBar mSeekBarX, mSeekBarY;
     //private TextView tvX, tvY;
     private TextView selectedPiePiece;
 //    protected String[] mMonths = new String[] {
 //            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"
 //    };
 
-    protected String[] mParties = new String[] {
+    protected String[] mParties = new String[]{
             "Ren. Energy", "Technology", "Rare Minerals", "Infrastructure"
     };
 
@@ -64,8 +59,8 @@ public class PieChartActivity extends FragmentActivity implements OnSeekBarChang
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_piechart);
 
-   //     tvX = (TextView) findViewById(R.id.tvXMax);
-     //   tvY = (TextView) findViewById(R.id.tvYMax);
+        //     tvX = (TextView) findViewById(R.id.tvXMax);
+        //   tvY = (TextView) findViewById(R.id.tvYMax);
         selectedPiePiece = (TextView) findViewById(R.id.selectedPiePiece);
 
 //        mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
@@ -135,89 +130,6 @@ public class PieChartActivity extends FragmentActivity implements OnSeekBarChang
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-//        switch (item.getItemId()) {
-//            case R.id.actionToggleValues: {
-//                for (IDataSet<?> set : mChart.getData().getDataSets())
-//                    set.setDrawValues(!set.isDrawValuesEnabled());
-//
-//                mChart.invalidate();
-//                Toast.makeText(this, "Toggle Value", Toast.LENGTH_SHORT).show();
-//                break;
-//            }
-//            case R.id.actionToggleHole: {
-//                if (mChart.isDrawHoleEnabled())
-//                    mChart.setDrawHoleEnabled(false);
-//                else
-//                    mChart.setDrawHoleEnabled(true);
-//                mChart.invalidate();
-//                Toast.makeText(this, "Toggle Hole", Toast.LENGTH_SHORT).show();
-//                break;
-//            }
-//            case R.id.actionDrawCenter: {
-//                if (mChart.isDrawCenterTextEnabled())
-//                    mChart.setDrawCenterText(false);
-//                else
-//                    mChart.setDrawCenterText(true);
-//                mChart.invalidate();
-//                Toast.makeText(this, "Toggle DrawCenter", Toast.LENGTH_SHORT).show();
-//                break;
-//            }
-//            case R.id.actionToggleXVals: {
-//
-//                mChart.setDrawEntryLabels(!mChart.isDrawEntryLabelsEnabled());
-//                mChart.invalidate();
-//                Toast.makeText(this, "Toggle XVals", Toast.LENGTH_SHORT).show();
-//                break;
-//            }
-//            case R.id.actionSave: {
-//                // mChart.saveToGallery("title"+System.currentTimeMillis());
-//                mChart.saveToPath("title" + System.currentTimeMillis(), "");
-//                Toast.makeText(this, "Toggle Save", Toast.LENGTH_SHORT).show();
-//                break;
-//            }
-//            case R.id.actionTogglePercent:
-//                mChart.setUsePercentValues(!mChart.isUsePercentValuesEnabled());
-//                mChart.invalidate();
-//                Toast.makeText(this, "Toggle Perfcent", Toast.LENGTH_SHORT).show();
-//                break;
-//            case R.id.animateX: {
-//                mChart.animateX(1400);
-//                Toast.makeText(this, "Toggle animateX", Toast.LENGTH_SHORT).show();
-//                break;
-//            }
-//            case R.id.animateY: {
-//                mChart.animateY(1400);
-//                Toast.makeText(this, "Toggle animate Y", Toast.LENGTH_SHORT).show();
-//                break;
-//            }
-//            case R.id.animateXY: {
-//                mChart.animateXY(1400, 1400);
-//                Toast.makeText(this, "Toggle animate XY", Toast.LENGTH_SHORT).show();
-//                break;
-//            }
-//            case R.id.actionToggleSpin: {
-//                mChart.spin(1000, mChart.getRotationAngle(), mChart.getRotationAngle() + 360, Easing.EasingOption
-//                        .EaseInCubic);
-//                Toast.makeText(this, "Toggle Spin", Toast.LENGTH_SHORT).show();
-//                break;
-//            }
-//        }
-        return true;
-    }
-
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-//        tvX.setText("" + (mSeekBarX.getProgress()));
-//        tvY.setText("" + (mSeekBarY.getProgress()));
-//
-//        setData(mSeekBarX.getProgress(), mSeekBarY.getProgress());
-//        Toast.makeText(this, "ProgressChanged", Toast.LENGTH_SHORT).show();
-    }
-
     private void setData(int count, float range) {
 
         float mult = range;
@@ -226,7 +138,7 @@ public class PieChartActivity extends FragmentActivity implements OnSeekBarChang
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
-        for (int i = 0; i < count ; i++) {
+        for (int i = 0; i < count; i++) {
             entries.add(new PieEntry((float) ((Math.random() * mult) + mult / 5), mParties[i % mParties.length]));
         }
 
@@ -305,14 +217,15 @@ public class PieChartActivity extends FragmentActivity implements OnSeekBarChang
     }
 
     @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-        // TODO Auto-generated method stub
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+    }
 
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
     }
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        // TODO Auto-generated method stub
-
     }
+
 }
