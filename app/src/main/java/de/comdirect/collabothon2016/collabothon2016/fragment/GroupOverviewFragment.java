@@ -98,7 +98,6 @@ public class GroupOverviewFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_group_overview, container, false);
         ButterKnife.bind(this, rootView);
 
-
         groups = EventBus.getDefault().getStickyEvent(GroupsReceivedEvent.class).groups;
 
         // use this setting to improve performance if you know that changes
@@ -110,10 +109,8 @@ public class GroupOverviewFragment extends Fragment {
         groupsRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-//        mAdapter = new GroupItemAdapter(new String[]{"a", "b", "c", "d", "e"});
         mAdapter = new GroupItemAdapter(groups);
         groupsRecyclerView.setAdapter(mAdapter);
-
 
 //        myGroupButton1.setOnClickListener(new View.OnClickListener() {
 //            @Override

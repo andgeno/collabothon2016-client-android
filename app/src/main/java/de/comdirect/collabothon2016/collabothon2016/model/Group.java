@@ -16,6 +16,7 @@ public class Group {
     public String groupName;
     public Map<Nutzer, GroupScore> userScores;
     public double amountOverall;
+    public String description;
 
     @Override
     public String toString() {
