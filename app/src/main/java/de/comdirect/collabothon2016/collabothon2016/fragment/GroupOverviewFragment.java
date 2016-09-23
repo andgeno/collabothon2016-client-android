@@ -14,10 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.comdirect.collabothon2016.collabothon2016.R;
-import de.comdirect.collabothon2016.collabothon2016.viewadapter.MyAdapter;
+import de.comdirect.collabothon2016.collabothon2016.event.GroupsReceivedEvent;
+import de.comdirect.collabothon2016.collabothon2016.model.Group;
+import de.comdirect.collabothon2016.collabothon2016.viewadapter.GroupItemAdapter;
 
 
 /**
@@ -52,6 +58,8 @@ public class GroupOverviewFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
 
     private OnFragmentInteractionListener mListener;
+
+    private List<Group> groups;
 
     public GroupOverviewFragment() {
         // Required empty public constructor
@@ -91,6 +99,8 @@ public class GroupOverviewFragment extends Fragment {
         ButterKnife.bind(this, rootView);
 
 
+        groups = EventBus.getDefault().getStickyEvent(GroupsReceivedEvent.class).groups;
+
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         groupsRecyclerView.setHasFixedSize(true);
@@ -100,7 +110,8 @@ public class GroupOverviewFragment extends Fragment {
         groupsRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        mAdapter = new MyAdapter(new String[]{"a", "b", "c", "d", "e"});
+//        mAdapter = new GroupItemAdapter(new String[]{"a", "b", "c", "d", "e"});
+        mAdapter = new GroupItemAdapter(groups);
         groupsRecyclerView.setAdapter(mAdapter);
 
 

@@ -1,19 +1,20 @@
 package de.comdirect.collabothon2016.collabothon2016.viewadapter;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import de.comdirect.collabothon2016.collabothon2016.BuildConfig;
 import de.comdirect.collabothon2016.collabothon2016.R;
+import de.comdirect.collabothon2016.collabothon2016.model.Group;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private String[] mDataset;
+public class GroupItemAdapter extends RecyclerView.Adapter<GroupItemAdapter.ViewHolder> {
+    private List<Group> mGroups;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -30,13 +31,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(String[] myDataset) {
-        mDataset = myDataset;
+    public GroupItemAdapter(List<Group> groups) {
+        mGroups = groups;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public GroupItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_group_item, parent, false);
         // set the view's size, margins, paddings and layout parameters
@@ -49,16 +50,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-//        holder.mTextView.setText(mDataset[position]);
+//        holder.mTextView.setText(mGroups[position]);
 
-        Log.e(BuildConfig.LOG_TAG, "binding item: " + position);
-        holder.groupName.setText("demo");
+//        Log.e(BuildConfig.LOG_TAG, "binding item: " + position);
+        Group group = mGroups.get(position);
+        holder.groupName.setText(group.groupName);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        Log.e(BuildConfig.LOG_TAG, "item count: " + mDataset.length);
-        return mDataset.length;
+        return mGroups.size();
     }
 }
