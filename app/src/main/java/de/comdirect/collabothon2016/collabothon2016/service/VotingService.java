@@ -42,6 +42,9 @@ public class VotingService {
     public interface RestService {
         @GET("voting/suggestions/group/{group-id}")
         Observable<Response<ResponseBody>> getVotes(@Path("group-id") int groupId);
+
+        @GET("voting/leaderboard/group/{group-id}")
+        Observable<Response<ResponseBody>> getLeaders(@Path("group-id") int groupId);
     }
 
 
