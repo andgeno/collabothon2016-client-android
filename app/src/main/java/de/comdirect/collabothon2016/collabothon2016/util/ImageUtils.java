@@ -47,13 +47,13 @@ public class ImageUtils {
         Drawable drawable = null;
         switch (groupId) {
             case 1:
-                drawable = context.getResources().getDrawable(R.drawable.ic_avatar_dummy);
+                drawable = context.getResources().getDrawable(R.drawable.heisenberg_gold);
                 break;
             case 2:
-                drawable = context.getResources().getDrawable(R.drawable.ic_avatar_dummy);
+                drawable = context.getResources().getDrawable(R.drawable.man_silver);
                 break;
             case 3:
-                drawable = context.getResources().getDrawable(R.drawable.ic_avatar_dummy);
+                drawable = context.getResources().getDrawable(R.drawable.woman_bronze);
                 break;
             default:
                 throw new IllegalStateException("Unknown user ID");
