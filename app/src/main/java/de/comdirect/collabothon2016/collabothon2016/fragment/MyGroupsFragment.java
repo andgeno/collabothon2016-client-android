@@ -114,14 +114,6 @@ public class MyGroupsFragment extends Fragment {
         mAdapter = new GroupItemAdapter(groups, group -> mListener.groupItemSelected(group));
         groupsRecyclerView.setAdapter(mAdapter);
 
-//        myGroupButton1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(getContext(), "Open Group 1", Toast.LENGTH_SHORT).show();
-//                ((MainActivity)getActivity()).onShowGroupDetails(1);
-//            }
-//        });
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

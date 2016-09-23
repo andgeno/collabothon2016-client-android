@@ -3,12 +3,23 @@ package de.comdirect.collabothon2016.collabothon2016.fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.comdirect.collabothon2016.collabothon2016.R;
+import de.comdirect.collabothon2016.collabothon2016.model.Vote;
+import de.comdirect.collabothon2016.collabothon2016.viewadapter.VoteItemAdapter;
 
 
 /**
@@ -30,6 +41,17 @@ public class VotingFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout swipeRefreshLayout;
+
+    @BindView(R.id.votesRecyclerView)
+    RecyclerView votesRecyclerView;
+
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    private List<Vote> votes;
 
     public VotingFragment() {
         // Required empty public constructor
@@ -65,7 +87,53 @@ public class VotingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_isin_browser, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_voting, container, false);
+        ButterKnife.bind(this, rootView);
+
+        // TODO request data from API
+        votes = new ArrayList<>();
+        Vote v;
+        v = new Vote();
+
+        v.stockName = "name 1";
+        v.stockIsin = "isin 1";
+        votes.add(v);
+
+        v.stockName = "name 2";
+        v.stockIsin = "isin 2";
+        votes.add(v);
+
+        v.stockName = "name 3";
+        v.stockIsin = "isin 3";
+        votes.add(v);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        votesRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(getContext());
+        votesRecyclerView.setLayoutManager(mLayoutManager);
+
+        // specify an adapter (see also next example)
+        mAdapter = new VoteItemAdapter(votes, vote -> mListener.voteItemSelected(vote));
+        votesRecyclerView.setAdapter(mAdapter);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+//                Toast.makeText(getContext(), "Refreshing", Toast.LENGTH_SHORT).show();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 1500);
+            }
+        });
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -104,5 +172,8 @@ public class VotingFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+
+        void voteItemSelected(Vote vote);
+
     }
 }

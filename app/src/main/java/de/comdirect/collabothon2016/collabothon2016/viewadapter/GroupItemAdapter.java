@@ -2,7 +2,6 @@ package de.comdirect.collabothon2016.collabothon2016.viewadapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import de.comdirect.collabothon2016.collabothon2016.BuildConfig;
 import de.comdirect.collabothon2016.collabothon2016.R;
 import de.comdirect.collabothon2016.collabothon2016.model.Group;
 import de.comdirect.collabothon2016.collabothon2016.util.ImageUtils;
@@ -83,7 +81,6 @@ public class GroupItemAdapter extends RecyclerView.Adapter<GroupItemAdapter.View
         Group group = mGroups.get(position);
         setViewByGroup(holder, group);
         holder.view.setOnClickListener(v -> {
-            Log.d(BuildConfig.LOG_TAG, "yay");
             mListener.groupItemSelected(group);
         });
     }
