@@ -11,13 +11,13 @@ public class ImageUtils {
         Drawable drawable = null;
         switch (groupId) {
             case 1:
-                drawable = context.getResources().getDrawable(R.drawable.ic_account_box_black_24dp);
+                drawable = context.getResources().getDrawable(R.drawable.Flower_power_01_512);
                 break;
             case 2:
-                drawable = context.getResources().getDrawable(R.drawable.ic_avatar_dummy);
+                drawable = context.getResources().getDrawable(R.drawable.chemistry);
                 break;
             case 3:
-                drawable = context.getResources().getDrawable(R.drawable.ic_menu_camera);
+                drawable = context.getResources().getDrawable(R.drawable.farming_food_green_grow_leaf_nature_organic_plant_icon_3);
                 break;
             default:
                 throw new IllegalStateException("Unknown group ID");
@@ -29,13 +29,13 @@ public class ImageUtils {
         Drawable drawable = null;
         switch (groupId) {
             case 1:
-                drawable = context.getResources().getDrawable(R.drawable.ic_avatar_dummy);
+                drawable = context.getResources().getDrawable(R.drawable.heisenberg_1x);
                 break;
             case 2:
-                drawable = context.getResources().getDrawable(R.drawable.ic_avatar_dummy);
+                drawable = context.getResources().getDrawable(R.drawable.doctor_icon_icons);
                 break;
             case 3:
-                drawable = context.getResources().getDrawable(R.drawable.ic_avatar_dummy);
+                drawable = context.getResources().getDrawable(R.drawable.superman_icon_icons);
                 break;
             default:
                 throw new IllegalStateException("Unknown user ID");
