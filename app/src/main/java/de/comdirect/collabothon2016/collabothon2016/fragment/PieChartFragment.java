@@ -53,7 +53,6 @@ public class PieChartFragment extends Fragment implements OnChartValueSelectedLi
 
     private OnFragmentInteractionListener mListener;
 
-
     @BindView(R.id.pie_chart)
     public PieChart mChart;
     @BindView(R.id.pie_chart_selection_text)

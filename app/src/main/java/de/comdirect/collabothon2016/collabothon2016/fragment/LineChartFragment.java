@@ -1,27 +1,22 @@
+package de.comdirect.collabothon2016.collabothon2016.fragment;
 
-package de.comdirect.collabothon2016.collabothon2016.activity;
-
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.WindowManager;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.Toast;
+import android.view.View;
+import android.view.ViewGroup;
 
-import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.Legend.LegendForm;
 import com.github.mikephil.charting.components.LimitLine;
-import com.github.mikephil.charting.components.LimitLine.LimitLabelPosition;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -35,45 +30,123 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.comdirect.collabothon2016.collabothon2016.R;
 
-public class LineChartActivity1 extends FragmentActivity implements OnSeekBarChangeListener,
-        OnChartGestureListener, OnChartValueSelectedListener {
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link LineChartFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link LineChartFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class LineChartFragment extends Fragment implements OnChartGestureListener, OnChartValueSelectedListener {
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
 
-    private LineChart mChart;
-    //    private SeekBar mSeekBarX, mSeekBarY;
-//    private TextView tvX, tvY;
-    protected String[] mMonths = new String[]{
-            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"
-    };
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    private OnFragmentInteractionListener mListener;
+
+    @BindView(R.id.line_chart)
+    public LineChart mChart;
 
     protected Typeface mTfRegular;
     protected Typeface mTfLight;
 
+    protected String[] mMonths = new String[]{
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"
+    };
+
+    public LineChartFragment() {
+        // Required empty public constructor
+    }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment LineChartFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static LineChartFragment newInstance(String param1, String param2) {
+        LineChartFragment fragment = new LineChartFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mTfRegular = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
-        mTfLight = Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf");
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-//        setContentView(R.layout.activity_linechart);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
 
-//        tvX = (TextView) findViewById(R.id.tvXMax);
-//        tvY = (TextView) findViewById(R.id.tvYMax);
-//
-//        mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
-//        mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
-//
-//        mSeekBarX.setProgress(45);
-//        mSeekBarY.setProgress(100);
-//
-//        mSeekBarY.setOnSeekBarChangeListener(this);
-//        mSeekBarX.setOnSeekBarChangeListener(this);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_line_chart, container, false);
+        ButterKnife.bind(this, rootView);
+        setupLineChart();
+        return rootView;
+    }
 
-//        mChart = (LineChart) findViewById(R.id.chart1);
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
+
+    private void setupLineChart() {
+        mTfRegular = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Regular.ttf");
+        mTfLight = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Light.ttf");
+
         mChart.setDescription("");
         mChart.setOnChartGestureListener(this);
         mChart.setOnChartValueSelectedListener(this);
@@ -107,7 +180,7 @@ public class LineChartActivity1 extends FragmentActivity implements OnSeekBarCha
         LimitLine llXAxis = new LimitLine(10f, "Index 10");
         llXAxis.setLineWidth(4f);
         llXAxis.enableDashedLine(10f, 10f, 0f);
-        llXAxis.setLabelPosition(LimitLabelPosition.RIGHT_BOTTOM);
+        llXAxis.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
         llXAxis.setTextSize(10f);
 
         XAxis xAxis = mChart.getXAxis();
@@ -117,7 +190,7 @@ public class LineChartActivity1 extends FragmentActivity implements OnSeekBarCha
         //xAxis.addLimitLine(llXAxis); // add x-axis limit line
 
 
-        Typeface tf = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Regular.ttf");
 
 //        LimitLine ll1 = new LimitLine(150f, "Upper Limit");
 //        ll1.setLineWidth(4f);
@@ -175,187 +248,13 @@ public class LineChartActivity1 extends FragmentActivity implements OnSeekBarCha
         Legend l = mChart.getLegend();
 
         // modify the legend ...
-        l.setForm(LegendForm.LINE);
+        l.setForm(Legend.LegendForm.LINE);
 
         // dont forget to refresh the drawing
         mChart.invalidate();
     }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.line, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.actionToggleValues: {
-                List<ILineDataSet> sets = mChart.getData()
-                        .getDataSets();
-
-                for (ILineDataSet iSet : sets) {
-
-                    LineDataSet set = (LineDataSet) iSet;
-                    set.setDrawValues(!set.isDrawValuesEnabled());
-                }
-
-                mChart.invalidate();
-                break;
-            }
-            case R.id.actionToggleHighlight: {
-                if (mChart.getData() != null) {
-                    mChart.getData().setHighlightEnabled(!mChart.getData().isHighlightEnabled());
-                    mChart.invalidate();
-                }
-                break;
-            }
-            case R.id.actionToggleFilled: {
-
-                List<ILineDataSet> sets = mChart.getData()
-                        .getDataSets();
-
-                for (ILineDataSet iSet : sets) {
-
-                    LineDataSet set = (LineDataSet) iSet;
-                    if (set.isDrawFilledEnabled())
-                        set.setDrawFilled(false);
-                    else
-                        set.setDrawFilled(true);
-                }
-                mChart.invalidate();
-                break;
-            }
-            case R.id.actionToggleCircles: {
-                List<ILineDataSet> sets = mChart.getData()
-                        .getDataSets();
-
-                for (ILineDataSet iSet : sets) {
-
-                    LineDataSet set = (LineDataSet) iSet;
-                    if (set.isDrawCirclesEnabled())
-                        set.setDrawCircles(false);
-                    else
-                        set.setDrawCircles(true);
-                }
-                mChart.invalidate();
-                break;
-            }
-            case R.id.actionToggleCubic: {
-                List<ILineDataSet> sets = mChart.getData()
-                        .getDataSets();
-
-                for (ILineDataSet iSet : sets) {
-
-                    LineDataSet set = (LineDataSet) iSet;
-                    set.setMode(set.getMode() == LineDataSet.Mode.CUBIC_BEZIER
-                            ? LineDataSet.Mode.LINEAR
-                            : LineDataSet.Mode.CUBIC_BEZIER);
-                }
-                mChart.invalidate();
-                break;
-            }
-            case R.id.actionToggleStepped: {
-                List<ILineDataSet> sets = mChart.getData()
-                        .getDataSets();
-
-                for (ILineDataSet iSet : sets) {
-
-                    LineDataSet set = (LineDataSet) iSet;
-                    set.setMode(set.getMode() == LineDataSet.Mode.STEPPED
-                            ? LineDataSet.Mode.LINEAR
-                            : LineDataSet.Mode.STEPPED);
-                }
-                mChart.invalidate();
-                break;
-            }
-            case R.id.actionToggleHorizontalCubic: {
-                List<ILineDataSet> sets = mChart.getData()
-                        .getDataSets();
-
-                for (ILineDataSet iSet : sets) {
-
-                    LineDataSet set = (LineDataSet) iSet;
-                    set.setMode(set.getMode() == LineDataSet.Mode.HORIZONTAL_BEZIER
-                            ? LineDataSet.Mode.LINEAR
-                            : LineDataSet.Mode.HORIZONTAL_BEZIER);
-                }
-                mChart.invalidate();
-                break;
-            }
-            case R.id.actionTogglePinch: {
-                if (mChart.isPinchZoomEnabled())
-                    mChart.setPinchZoom(false);
-                else
-                    mChart.setPinchZoom(true);
-
-                mChart.invalidate();
-                break;
-            }
-            case R.id.actionToggleAutoScaleMinMax: {
-                mChart.setAutoScaleMinMaxEnabled(!mChart.isAutoScaleMinMaxEnabled());
-                mChart.notifyDataSetChanged();
-                break;
-            }
-            case R.id.animateX: {
-                mChart.animateX(3000);
-                break;
-            }
-            case R.id.animateY: {
-                mChart.animateY(3000, Easing.EasingOption.EaseInCubic);
-                break;
-            }
-            case R.id.animateXY: {
-                mChart.animateXY(3000, 3000);
-                break;
-            }
-            case R.id.actionSave: {
-                if (mChart.saveToPath("title" + System.currentTimeMillis(), "")) {
-                    Toast.makeText(getApplicationContext(), "Saving SUCCESSFUL!",
-                            Toast.LENGTH_SHORT).show();
-                } else
-                    Toast.makeText(getApplicationContext(), "Saving FAILED!", Toast.LENGTH_SHORT)
-                            .show();
-
-                // mChart.saveToGallery("title"+System.currentTimeMillis())
-                break;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//
-//        tvX.setText("" + (mSeekBarX.getProgress() + 1));
-//        tvY.setText("" + (mSeekBarY.getProgress()));
-//
-//        generateDataSet(mSeekBarX.getProgress() + 1, mSeekBarY.getProgress());
-
-        // redraw
-        mChart.invalidate();
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-        // TODO Auto-generated method stub
-
-    }
-
     private LineDataSet generateDataSet(int count, float range, int color, int abweichung) {
-
         ArrayList<Entry> values = new ArrayList<Entry>();
 
         for (int i = 0; i < count; i++) {
@@ -397,7 +296,7 @@ public class LineChartActivity1 extends FragmentActivity implements OnSeekBarCha
 
             if (Utils.getSDKInt() >= 18) {
                 // fill drawable only supported on api level 18 and above
-                Drawable drawable = ContextCompat.getDrawable(this, color);
+                Drawable drawable = ContextCompat.getDrawable(getContext(), color);
                 set1.setFillDrawable(drawable);
             } else {
                 set1.setFillColor(Color.BLACK);
@@ -463,6 +362,5 @@ public class LineChartActivity1 extends FragmentActivity implements OnSeekBarCha
     public void onNothingSelected() {
         Log.i("Nothing selected", "Nothing selected.");
     }
-
 
 }

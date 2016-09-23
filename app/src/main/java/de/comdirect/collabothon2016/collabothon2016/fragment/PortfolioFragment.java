@@ -30,9 +30,6 @@ public class PortfolioFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-//    @BindView(R.id.containerPieChart)
-//    public FrameLayout containerPieChart;
-
     public PortfolioFragment() {
         // Required empty public constructor
     }
@@ -73,6 +70,12 @@ public class PortfolioFragment extends Fragment {
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.containerPieChart, fragPieChart, PieChartFragment.class.getSimpleName())
+                .commit();
+
+        Fragment fragLineChart = LineChartFragment.newInstance(null, null);
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.containerLineChart, fragLineChart, LineChartFragment.class.getSimpleName())
                 .commit();
 
         return rootView;
