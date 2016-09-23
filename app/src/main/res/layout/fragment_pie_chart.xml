@@ -26,7 +26,8 @@
             android:layout_height="64dp"
             android:layout_weight="1"
             android:text="no selection"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAlignment="center" />
         <!--android:layout_alignParentRight="true"-->
         <!--android:layout_alignBottom="@+id/chart1"-->
         <!--android:layout_marginBottom="15dp"-->
