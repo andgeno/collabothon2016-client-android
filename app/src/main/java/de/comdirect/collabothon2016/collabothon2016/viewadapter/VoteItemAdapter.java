@@ -84,6 +84,10 @@ public class VoteItemAdapter extends RecyclerView.Adapter<VoteItemAdapter.ViewHo
         return mVotes.size();
     }
 
+    @Override
+    public long getItemId(int position) {
+        return mVotes.get(position).userId;
+    }
 
     public static void setViewByVote(ViewHolder holder, Vote vote) {
         Context ctx = holder.view.getContext();
@@ -91,8 +95,8 @@ public class VoteItemAdapter extends RecyclerView.Adapter<VoteItemAdapter.ViewHo
         int memberCount = 0;
 //        Log.e(BuildConfig.LOG_TAG, "binding item: " + position);
 
-        holder.voteStockName.setText(vote.stockName);
-        holder.voteStockIsin.setText(vote.stockIsin);
+        holder.voteStockName.setText(vote.title);
+        holder.voteStockIsin.setText(vote.wertpapier);
     }
 
 }

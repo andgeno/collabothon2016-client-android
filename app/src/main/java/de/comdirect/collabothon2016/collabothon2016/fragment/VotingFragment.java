@@ -3,23 +3,40 @@ package de.comdirect.collabothon2016.collabothon2016.fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.comdirect.collabothon2016.collabothon2016.BuildConfig;
 import de.comdirect.collabothon2016.collabothon2016.R;
+import de.comdirect.collabothon2016.collabothon2016.event.GroupSelectedEvent;
+import de.comdirect.collabothon2016.collabothon2016.model.Group;
 import de.comdirect.collabothon2016.collabothon2016.model.Vote;
+import de.comdirect.collabothon2016.collabothon2016.service.VotingService;
 import de.comdirect.collabothon2016.collabothon2016.viewadapter.VoteItemAdapter;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+
+import static rx.schedulers.Schedulers.newThread;
 
 
 /**
@@ -48,7 +65,7 @@ public class VotingFragment extends Fragment {
     @BindView(R.id.votesRecyclerView)
     RecyclerView votesRecyclerView;
 
-    private RecyclerView.Adapter mAdapter;
+    private VoteItemAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     private List<Vote> votes;
@@ -85,28 +102,33 @@ public class VotingFragment extends Fragment {
     }
 
     @Override
+    public void onAttachFragment(Fragment childFragment) {
+        super.onAttachFragment(childFragment);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_voting, container, false);
         ButterKnife.bind(this, rootView);
 
-        // TODO request data from API
-        votes = new ArrayList<>();
-        Vote v;
-        v = new Vote();
-
-        v.stockName = "name 1";
-        v.stockIsin = "isin 1";
-        votes.add(v);
-
-        v.stockName = "name 2";
-        v.stockIsin = "isin 2";
-        votes.add(v);
-
-        v.stockName = "name 3";
-        v.stockIsin = "isin 3";
-        votes.add(v);
-
+//        // TODO request data from API
+//        votes = new ArrayList<>();
+//        Vote v;
+//        v = new Vote();
+//
+//        v.title = "name 1";
+//        v.wertpapier = "isin 1";
+//        votes.add(v);
+//
+//        v.title = "name 2";
+//        v.wertpapier = "isin 2";
+//        votes.add(v);
+//
+//        v.title = "name 3";
+//        v.wertpapier = "isin 3";
+//        votes.add(v);
+//
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         votesRecyclerView.setHasFixedSize(true);
@@ -116,20 +138,18 @@ public class VotingFragment extends Fragment {
         votesRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
+        votes = new ArrayList<>();
         mAdapter = new VoteItemAdapter(votes, vote -> mListener.voteItemSelected(vote));
         votesRecyclerView.setAdapter(mAdapter);
+
+
+        refreshList();
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
 //                Toast.makeText(getContext(), "Refreshing", Toast.LENGTH_SHORT).show();
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                }, 1500);
+                refreshList();
             }
         });
 
@@ -176,4 +196,49 @@ public class VotingFragment extends Fragment {
         void voteItemSelected(Vote vote);
 
     }
+
+
+    private void refreshList() {
+        swipeRefreshLayout.setRefreshing(true);
+        Group group = EventBus.getDefault().getStickyEvent(GroupSelectedEvent.class).group;
+        VotingService.getInstance().getService().getVotes(group.id)
+                .subscribeOn(newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Response<ResponseBody>>() {
+                    @Override
+                    public void onCompleted() {
+                        // do nothing
+                        Log.e(BuildConfig.LOG_TAG, "VOTES completed");
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(BuildConfig.LOG_TAG, "VOTES error: " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Response<ResponseBody> response) {
+                        Log.e(BuildConfig.LOG_TAG, "VOTES response: " + response.code());
+
+                        String json = null;
+                        try {
+                            json = response.body().string();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        Type collectionType = new TypeToken<List<Vote>>() {
+                        }.getType();
+                        List<Vote> votes = new Gson().fromJson(json, collectionType);
+                        Log.e(BuildConfig.LOG_TAG, "VOTES response: " + votes);
+
+                        VotingFragment.this.votes = votes;
+
+                        mAdapter = new VoteItemAdapter(votes, vote -> mListener.voteItemSelected(vote));
+                        votesRecyclerView.swapAdapter(mAdapter, true);
+                    }
+                });
+    }
+
 }
