@@ -22,10 +22,10 @@
 
             <ImageView
                 android:id="@+id/group_avatar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:src="@drawable/ic_account_circle_white_48dp"
-                android:paddingRight="8dp" />
+                android:paddingRight="16dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -69,22 +69,22 @@
 
             <ImageView
                 android:id="@+id/member_first_rank"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_weight="1"
                 android:src="@drawable/ic_add_white_48dp" />
 
             <ImageView
                 android:id="@+id/member_second_rank"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_weight="1"
                 android:src="@drawable/ic_add_white_48dp" />
 
             <ImageView
                 android:id="@+id/member_third_rank"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_weight="1"
                 android:src="@drawable/ic_add_white_48dp" />
         </LinearLayout>

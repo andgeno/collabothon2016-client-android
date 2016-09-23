@@ -390,6 +390,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 }
             }
 
+            if (EventBus.getDefault().getStickyEvent(GroupsReceivedEvent.class) == null) {
+                return false;
+            }
+
             // TODO: register the new account here.
             return true;
         }
