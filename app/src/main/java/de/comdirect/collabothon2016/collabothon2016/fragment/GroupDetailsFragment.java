@@ -30,7 +30,6 @@ public class GroupDetailsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        ((MainActivity) getActivity()).getSupportActionBar().setTitle("GRUPPENNAMMMMMEEE");
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_group_overview, container, false);
         ButterKnife.bind(this, rootView);
