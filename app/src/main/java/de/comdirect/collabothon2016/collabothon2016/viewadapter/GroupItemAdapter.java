@@ -1,8 +1,6 @@
 package de.comdirect.collabothon2016.collabothon2016.viewadapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,24 +82,10 @@ public class GroupItemAdapter extends RecyclerView.Adapter<GroupItemAdapter.View
             memberCount = group.user.size();
         }
         holder.memberCount.setText("" + memberCount);
-        Drawable rankDrawable;
-        rankDrawable = createLayeredDrawable(ImageUtils.getCrestByRank(ctx, 1), ImageUtils.getUserAvatar(ctx, 1));
-        holder.memberFirstRank.setImageDrawable(rankDrawable);
-        rankDrawable = createLayeredDrawable(ImageUtils.getCrestByRank(ctx, 2), ImageUtils.getUserAvatar(ctx, 2));
-        holder.memberSecondRank.setImageDrawable(rankDrawable);
-        rankDrawable = createLayeredDrawable(ImageUtils.getCrestByRank(ctx, 3), ImageUtils.getUserAvatar(ctx, 3));
-        holder.memberThirdRank.setImageDrawable(rankDrawable);
+        holder.memberFirstRank.setImageDrawable(ImageUtils.getUserAvatarWithCrest(ctx, 1));
+        holder.memberSecondRank.setImageDrawable(ImageUtils.getUserAvatarWithCrest(ctx, 2));
+        holder.memberThirdRank.setImageDrawable(ImageUtils.getUserAvatarWithCrest(ctx, 3));
         holder.groupDescription.setText(group.description);
-    }
-
-    private Drawable createLayeredDrawable(Drawable crestByRank, Drawable userAvatar) {
-        Drawable[] layers = new Drawable[2];
-//        layers[0] = crestByRank;
-        layers[1] = crestByRank;
-        layers[0] = userAvatar;
-//        layers[1] = userAvatar;
-        LayerDrawable drawable = new LayerDrawable(layers);
-        return drawable;
     }
 
     // Return the size of your dataset (invoked by the layout manager)

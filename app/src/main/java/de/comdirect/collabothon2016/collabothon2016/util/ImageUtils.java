@@ -43,6 +43,24 @@ public class ImageUtils {
         return drawable;
     }
 
+    public static Drawable getUserAvatarWithCrest(Context context, int groupId) {
+        Drawable drawable = null;
+        switch (groupId) {
+            case 1:
+                drawable = context.getResources().getDrawable(R.drawable.ic_avatar_dummy);
+                break;
+            case 2:
+                drawable = context.getResources().getDrawable(R.drawable.ic_avatar_dummy);
+                break;
+            case 3:
+                drawable = context.getResources().getDrawable(R.drawable.ic_avatar_dummy);
+                break;
+            default:
+                throw new IllegalStateException("Unknown user ID");
+        }
+        return drawable;
+    }
+
     public static Drawable getCrestByRank(Context context, int rank) {
         Drawable drawable = null;
         switch (rank) {
