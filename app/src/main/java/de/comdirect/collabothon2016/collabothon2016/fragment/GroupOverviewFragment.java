@@ -7,16 +7,23 @@ import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.comdirect.collabothon2016.collabothon2016.R;
-import de.comdirect.collabothon2016.collabothon2016.activity.MainActivity;
+import de.comdirect.collabothon2016.collabothon2016.event.GroupsReceivedEvent;
+import de.comdirect.collabothon2016.collabothon2016.model.Group;
+import de.comdirect.collabothon2016.collabothon2016.viewadapter.GroupItemAdapter;
 
 
 /**
@@ -44,10 +51,15 @@ public class GroupOverviewFragment extends Fragment {
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    @BindView(R.id.button_my_group_1)
-    Button myGroupButton1;
+    @BindView(R.id.groupsRecyclerView)
+    RecyclerView groupsRecyclerView;
+
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     private OnFragmentInteractionListener mListener;
+
+    private List<Group> groups;
 
     public GroupOverviewFragment() {
         // Required empty public constructor
@@ -86,13 +98,30 @@ public class GroupOverviewFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_group_overview, container, false);
         ButterKnife.bind(this, rootView);
 
-        myGroupButton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "Open Group 1", Toast.LENGTH_SHORT).show();
-                ((MainActivity)getActivity()).onShowGroupDetails(1);
-            }
-        });
+
+        groups = EventBus.getDefault().getStickyEvent(GroupsReceivedEvent.class).groups;
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        groupsRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(getContext());
+        groupsRecyclerView.setLayoutManager(mLayoutManager);
+
+        // specify an adapter (see also next example)
+//        mAdapter = new GroupItemAdapter(new String[]{"a", "b", "c", "d", "e"});
+        mAdapter = new GroupItemAdapter(groups);
+        groupsRecyclerView.setAdapter(mAdapter);
+
+
+//        myGroupButton1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(getContext(), "Open Group 1", Toast.LENGTH_SHORT).show();
+//                ((MainActivity)getActivity()).onShowGroupDetails(1);
+//            }
+//        });
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

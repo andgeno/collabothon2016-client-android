@@ -2,17 +2,20 @@ package de.comdirect.collabothon2016.collabothon2016.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-/**
- * Created by A3286390 on 22.09.2016.
- */
+import java.util.List;
+import java.util.Map;
+
 public class Group {
 
     public int id;
-    public String scores;
-//    private String groupname;
-//    private List<Members> memberList;
-//    private BigDecimal mmonthly
-
+    public List<Nutzer> user;
+    public String interval;
+    public double amount;
+    public String nextPeriod;
+    public String investingSince;
+    public String groupName;
+    public Map<Nutzer, GroupScore> userScores;
+    public double amountOverall;
 
     @Override
     public String toString() {
