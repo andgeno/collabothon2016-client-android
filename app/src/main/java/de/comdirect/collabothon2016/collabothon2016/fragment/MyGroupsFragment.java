@@ -135,7 +135,7 @@ public class MyGroupsFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Toast.makeText(getContext(), "REFRESH!!!!!!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Refreshing", Toast.LENGTH_SHORT).show();
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
