@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="de.comdirect.collabothon2016.collabothon2016.fragment.InvestmentFragment">
+        tools:context="de.comdirect.collabothon2016.collabothon2016.fragment.InvestmentFragment"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
