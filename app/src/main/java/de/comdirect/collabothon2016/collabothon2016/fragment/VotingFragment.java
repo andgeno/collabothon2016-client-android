@@ -142,7 +142,6 @@ public class VotingFragment extends Fragment {
         mAdapter = new VoteItemAdapter(votes, vote -> mListener.voteItemSelected(vote));
         votesRecyclerView.setAdapter(mAdapter);
 
-
         refreshList();
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -194,9 +193,7 @@ public class VotingFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
 
         void voteItemSelected(Vote vote);
-
     }
-
 
     private void refreshList() {
         swipeRefreshLayout.setRefreshing(true);

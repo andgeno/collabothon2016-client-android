@@ -4,11 +4,39 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import de.comdirect.collabothon2016.collabothon2016.BuildConfig;
 import de.comdirect.collabothon2016.collabothon2016.R;
+import de.comdirect.collabothon2016.collabothon2016.event.GroupSelectedEvent;
+import de.comdirect.collabothon2016.collabothon2016.model.Group;
+import de.comdirect.collabothon2016.collabothon2016.model.Leader;
+import de.comdirect.collabothon2016.collabothon2016.service.VotingService;
+import de.comdirect.collabothon2016.collabothon2016.viewadapter.LeaderboardItemAdapter;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+
+import static rx.schedulers.Schedulers.newThread;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +57,17 @@ public class LeaderboardFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout swipeRefreshLayout;
+
+    @BindView(R.id.leaderboardRecyclerView)
+    RecyclerView leaderboardRecyclerView;
+
+    private LeaderboardItemAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    private List<Leader> leaders;
 
     public LeaderboardFragment() {
         // Required empty public constructor
@@ -64,7 +103,33 @@ public class LeaderboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_leaderboard, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_leaderboard, container, false);
+        ButterKnife.bind(this, rootView);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        leaderboardRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(getContext());
+        leaderboardRecyclerView.setLayoutManager(mLayoutManager);
+
+        // specify an adapter (see also next example)
+        leaders = new ArrayList<>();
+        mAdapter = new LeaderboardItemAdapter(leaders, leader -> mListener.leaderItemSelected(leader));
+        leaderboardRecyclerView.setAdapter(mAdapter);
+
+        refreshList();
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+//                Toast.makeText(getContext(), "Refreshing", Toast.LENGTH_SHORT).show();
+                refreshList();
+            }
+        });
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -103,5 +168,50 @@ public class LeaderboardFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+
+        void leaderItemSelected(Leader leader);
+    }
+
+    private void refreshList() {
+        swipeRefreshLayout.setRefreshing(true);
+        Group group = EventBus.getDefault().getStickyEvent(GroupSelectedEvent.class).group;
+        VotingService.getInstance().getService().getLeaders(group.id)
+                .subscribeOn(newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Response<ResponseBody>>() {
+                    @Override
+                    public void onCompleted() {
+                        // do nothing
+                        Log.e(BuildConfig.LOG_TAG, "LEADERS completed");
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(BuildConfig.LOG_TAG, "LEADERS error: " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Response<ResponseBody> response) {
+                        Log.e(BuildConfig.LOG_TAG, "LEADERS response: " + response.code());
+
+                        String json = null;
+                        try {
+                            json = response.body().string();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        Type collectionType = new TypeToken<List<Leader>>() {
+                        }.getType();
+                        List<Leader> leaders = new Gson().fromJson(json, collectionType);
+                        Log.e(BuildConfig.LOG_TAG, "LEADERS response: " + leaders);
+
+                        LeaderboardFragment.this.leaders = leaders;
+
+                        mAdapter = new LeaderboardItemAdapter(leaders, leader -> mListener.leaderItemSelected(leader));
+                        leaderboardRecyclerView.swapAdapter(mAdapter, true);
+                    }
+                });
     }
 }

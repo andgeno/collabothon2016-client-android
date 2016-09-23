@@ -30,6 +30,7 @@ import de.comdirect.collabothon2016.collabothon2016.fragment.PieChartFragment;
 import de.comdirect.collabothon2016.collabothon2016.fragment.PortfolioFragment;
 import de.comdirect.collabothon2016.collabothon2016.fragment.VotingFragment;
 import de.comdirect.collabothon2016.collabothon2016.model.Group;
+import de.comdirect.collabothon2016.collabothon2016.model.Leader;
 import de.comdirect.collabothon2016.collabothon2016.model.Vote;
 import de.comdirect.collabothon2016.collabothon2016.service.GroupService;
 
@@ -239,6 +240,7 @@ public class MainActivity extends AppCompatActivity implements
     public void onFragmentInteraction(Uri uri) {
     }
 
+
     @Override
     public void groupItemSelected(Group group) {
         onShowGroupDetails(group);
@@ -248,4 +250,7 @@ public class MainActivity extends AppCompatActivity implements
     public void voteItemSelected(Vote vote) {
     }
 
+    @Override
+    public void leaderItemSelected(Leader leader) {
+    }
 }

@@ -29,12 +29,21 @@ public class ImageUtils {
         Drawable drawable = null;
         switch (userId) {
             case 1:
-                drawable = context.getResources().getDrawable(R.drawable.spy_icon);
+                drawable = context.getResources().getDrawable(R.drawable.user_walter);
                 break;
             case 2:
                 drawable = context.getResources().getDrawable(R.drawable.superman_icon);
                 break;
             case 3:
+                drawable = context.getResources().getDrawable(R.drawable.user_girl1);
+                break;
+            case 4:
+                drawable = context.getResources().getDrawable(R.drawable.spy_icon); //
+                break;
+            case 5:
+                drawable = context.getResources().getDrawable(R.drawable.user_girl2);
+                break;
+            case 6:
                 drawable = context.getResources().getDrawable(R.drawable.doctor_icon);
                 break;
             default:

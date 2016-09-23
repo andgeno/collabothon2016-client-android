@@ -2,11 +2,12 @@ package de.comdirect.collabothon2016.collabothon2016.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class Nutzer {
+public class Leader {
 
+    public int position;
     public int nutzerId;
+    public double performance;
     public String name;
-    public int globalScores;
 
     @Override
     public String toString() {
