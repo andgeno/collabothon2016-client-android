@@ -1,12 +1,15 @@
 package de.comdirect.collabothon2016.collabothon2016.viewadapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -40,6 +43,8 @@ public class VoteItemAdapter extends RecyclerView.Adapter<VoteItemAdapter.ViewHo
         public TextView voteStockIsin;
         @BindView(R.id.vote_invest_button)
         public Button voteInvestButton;
+        @BindView(R.id.voteBackgroundBox)
+        public LinearLayout voteBackgroundBox;
 
         public View view;
 
@@ -77,12 +82,20 @@ public class VoteItemAdapter extends RecyclerView.Adapter<VoteItemAdapter.ViewHo
         holder.view.setOnClickListener(v -> {
             mListener.voteItemSelected(vote);
         });
+
+        holder.voteBackgroundBox.setBackground(new ColorDrawable(Color.WHITE));
+
+        holder.voteInvestButton.setOnClickListener(v -> {
+            holder.voteBackgroundBox.setBackground(new ColorDrawable(Color.rgb(0, 170, 0)));
+        });
+
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mVotes.size();
+        return mVotes == null ? 0 : mVotes.size();
     }
 
     @Override
