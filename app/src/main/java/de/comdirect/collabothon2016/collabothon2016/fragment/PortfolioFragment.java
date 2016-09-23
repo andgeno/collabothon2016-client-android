@@ -30,6 +30,9 @@ public class PortfolioFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+//    @BindView(R.id.containerPieChart)
+//    public FrameLayout containerPieChart;
+
     public PortfolioFragment() {
         // Required empty public constructor
     }
@@ -62,10 +65,17 @@ public class PortfolioFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_portfolio, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_portfolio, container, false);
+
+        Fragment fragPieChart = PieChartFragment.newInstance(null, null);
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.containerPieChart, fragPieChart, PieChartFragment.class.getSimpleName())
+                .commit();
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -81,8 +91,7 @@ public class PortfolioFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
         }
     }
 

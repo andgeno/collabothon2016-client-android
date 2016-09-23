@@ -25,9 +25,9 @@ public class ImageUtils {
         return drawable;
     }
 
-    public static Drawable getUserAvatar(Context context, int groupId) {
+    public static Drawable getUserAvatar(Context context, int userId) {
         Drawable drawable = null;
-        switch (groupId) {
+        switch (userId) {
             case 1:
                 drawable = context.getResources().getDrawable(R.drawable.spy_icon);
                 break;
@@ -43,9 +43,9 @@ public class ImageUtils {
         return drawable;
     }
 
-    public static Drawable getUserAvatarWithCrest(Context context, int groupId) {
+    public static Drawable getUserAvatarWithCrest(Context context, int userId) {
         Drawable drawable = null;
-        switch (groupId) {
+        switch (userId) {
             case 1:
                 drawable = context.getResources().getDrawable(R.drawable.heisenberg_gold);
                 break;

@@ -26,6 +26,7 @@ import de.comdirect.collabothon2016.collabothon2016.fragment.GroupDetailsFragmen
 import de.comdirect.collabothon2016.collabothon2016.fragment.LeaderboardFragment;
 import de.comdirect.collabothon2016.collabothon2016.fragment.MyGroupsFragment;
 import de.comdirect.collabothon2016.collabothon2016.fragment.OverviewFragment;
+import de.comdirect.collabothon2016.collabothon2016.fragment.PieChartFragment;
 import de.comdirect.collabothon2016.collabothon2016.fragment.PortfolioFragment;
 import de.comdirect.collabothon2016.collabothon2016.fragment.VotingFragment;
 import de.comdirect.collabothon2016.collabothon2016.model.Group;
@@ -37,7 +38,8 @@ public class MainActivity extends AppCompatActivity implements
         OverviewFragment.OnFragmentInteractionListener,
         PortfolioFragment.OnFragmentInteractionListener,
         VotingFragment.OnFragmentInteractionListener,
-        LeaderboardFragment.OnFragmentInteractionListener {
+        LeaderboardFragment.OnFragmentInteractionListener,
+        PieChartFragment.OnFragmentInteractionListener {
 
     @BindView(R.id.nav_drawer_content)
     FrameLayout frameLayout;
