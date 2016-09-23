@@ -29,11 +29,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.comdirect.collabothon2016.collabothon2016.BuildConfig;
 import de.comdirect.collabothon2016.collabothon2016.R;
+import de.comdirect.collabothon2016.collabothon2016.model.Group;
 import de.comdirect.collabothon2016.collabothon2016.service.GroupService;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
@@ -326,7 +334,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
-            groupService.getService().getGroup(0)
+            groupService.getService().getGroups()
                     .subscribeOn(newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .toBlocking()
@@ -334,16 +342,33 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         @Override
                         public void onCompleted() {
                             // do nothing
+                            Log.e(BuildConfig.LOG_TAG, "GROUPS completed");
                         }
 
                         @Override
                         public void onError(Throwable e) {
-                            Log.e(BuildConfig.LOG_TAG, "error: " + e.getMessage());
+                            Log.e(BuildConfig.LOG_TAG, "GROUPS error: " + e.getMessage());
                         }
 
                         @Override
                         public void onNext(Response<ResponseBody> response) {
-                            Log.d(BuildConfig.LOG_TAG, "response: " + response.body());
+//                            Log.e(BuildConfig.LOG_TAG, "GROUPS response: " + response.body());
+
+                            String json = null;
+                            try {
+                                json = response.body().string();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            Gson gson = new Gson();
+                            JsonParser parser = new JsonParser();
+                            JsonElement elem = parser.parse(json);
+
+                            Type collectionType = new TypeToken<List<Group>>() {
+                            }.getType();
+                            List<Group> groups = gson.fromJson(json, collectionType);
+                            Log.e(BuildConfig.LOG_TAG, "GROUPS response: " + groups);
                         }
                     });
 
