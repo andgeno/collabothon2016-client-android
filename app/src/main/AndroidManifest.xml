@@ -28,6 +28,14 @@
             android:name=".activity.MainActivity"
             android:label="title_activity_nav_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".activity.PieChartActivity"
+            android:label="PieChart" />
+
+        <activity
+            android:name=".activity.LineChartActivity1"
+            android:label="PieChart" />
     </application>
 
 </manifest>
