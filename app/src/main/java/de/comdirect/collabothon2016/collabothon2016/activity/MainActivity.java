@@ -13,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -122,12 +121,13 @@ public class MainActivity extends AppCompatActivity implements
                 onShowIsinBrowser();
                 break;
             case R.id.nav_item_account:
+            case R.id.nav_item_open_wallet:
             case R.id.nav_item_about_and_help:
             case R.id.nav_item_change_avatar:
             case R.id.nav_item_isin_favorites:
             case R.id.nav_item_notifications:
             case R.id.nav_item_software_licenses:
-                Toast.makeText(this, "Not yet implemented", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Not yet implemented", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 throw new IllegalStateException("Unknown nav item selected.");
@@ -175,19 +175,19 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void onShowIsinBrowser() {
-        getSupportActionBar().setTitle("ISIN Browser");
-        VotingFragment frag = VotingFragment.newInstance(null, null);
-        String tag = frag.getClass().getSimpleName();
-
-        FragmentManager fm = getSupportFragmentManager();
-        boolean hasBackStackEntries = fm.getBackStackEntryCount() > 0;
-
-        FragmentTransaction ft = fm.beginTransaction();
-        if (hasBackStackEntries) {
-            ft.addToBackStack(null);
-        }
-        ft.replace(R.id.nav_drawer_content, frag, tag);
-        ft.commit();
+//        getSupportActionBar().setTitle("ISIN Browser");
+//        VotingFragment frag = VotingFragment.newInstance(null, null);
+//        String tag = frag.getClass().getSimpleName();
+//
+//        FragmentManager fm = getSupportFragmentManager();
+//        boolean hasBackStackEntries = fm.getBackStackEntryCount() > 0;
+//
+//        FragmentTransaction ft = fm.beginTransaction();
+//        if (hasBackStackEntries) {
+//            ft.addToBackStack(null);
+//        }
+//        ft.replace(R.id.nav_drawer_content, frag, tag);
+//        ft.commit();
     }
 
 //    public void onShowGroupDetails(int groupId) {
