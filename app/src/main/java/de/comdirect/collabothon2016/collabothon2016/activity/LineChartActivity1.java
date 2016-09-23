@@ -1,9 +1,7 @@
 
 package de.comdirect.collabothon2016.collabothon2016.activity;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.graphics.DashPathEffect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -16,7 +14,6 @@ import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -25,10 +22,8 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.Legend.LegendForm;
 import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.LimitLine.LimitLabelPosition;
-import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.CandleEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -157,7 +152,17 @@ public class LineChartActivity1 extends FragmentActivity implements OnSeekBarCha
         //mChart.getViewPortHandler().setMaximumScaleX(2f);
 
         // add data
-        setData(45, 20);
+        LineDataSet lineDataSet = generateDataSet(20, 10, R.drawable.fade_red, 0);
+        LineDataSet lineDataSet1 = generateDataSet(20, 12, R.drawable.fade_red2, -1);
+        ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+        dataSets.add(lineDataSet); // add the datasets
+        dataSets.add(lineDataSet1); // add the datasets
+
+        // create a data object with the datasets
+        LineData data = new LineData(dataSets);
+
+        // set data
+        mChart.setData(data);
 
 //        mChart.setVisibleXRange(20);
 //        mChart.setVisibleYRange(20f, AxisDependency.LEFT);
@@ -331,7 +336,7 @@ public class LineChartActivity1 extends FragmentActivity implements OnSeekBarCha
 //        tvX.setText("" + (mSeekBarX.getProgress() + 1));
 //        tvY.setText("" + (mSeekBarY.getProgress()));
 //
-//        setData(mSeekBarX.getProgress() + 1, mSeekBarY.getProgress());
+//        generateDataSet(mSeekBarX.getProgress() + 1, mSeekBarY.getProgress());
 
         // redraw
         mChart.invalidate();
@@ -349,15 +354,16 @@ public class LineChartActivity1 extends FragmentActivity implements OnSeekBarCha
 
     }
 
-    private void setData(int count, float range) {
+    private LineDataSet generateDataSet(int count, float range, int color, int abweichung) {
 
         ArrayList<Entry> values = new ArrayList<Entry>();
 
         for (int i = 0; i < count; i++) {
 
             float val = (float) (Math.random() * range) + 3;
-            val = val + i*2 + 100;
-            values.add(new Entry(i, val));
+            val = val + i*2 + 100 - i * abweichung;
+            int xWert = 1996 + i;
+            values.add(new Entry(xWert, val));
         }
 
         LineDataSet set1;
@@ -383,28 +389,24 @@ public class LineChartActivity1 extends FragmentActivity implements OnSeekBarCha
             set1.setValueTextSize(9f);
             set1.setDrawFilled(true);
             set1.setDrawValues(false);
-        //    set1.setFormLineWidth(1f);
+
+
+            //    set1.setFormLineWidth(1f);
         //    set1.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
         //    set1.setFormSize(15.f);
 
             if (Utils.getSDKInt() >= 18) {
                 // fill drawable only supported on api level 18 and above
-                Drawable drawable = ContextCompat.getDrawable(this, R.drawable.fade_red);
+                Drawable drawable = ContextCompat.getDrawable(this, color);
                 set1.setFillDrawable(drawable);
             }
             else {
                 set1.setFillColor(Color.BLACK);
             }
 
-            ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
-            dataSets.add(set1); // add the datasets
-
-            // create a data object with the datasets
-            LineData data = new LineData(dataSets);
-
-            // set data
-            mChart.setData(data);
+            return set1;
         }
+        return null;
     }
 
     @Override
